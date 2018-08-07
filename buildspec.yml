@@ -4,7 +4,7 @@ phases:
 
   install:
     commands:
-      - NODE_ENV=test npm instal
+      - NODE_ENV=test npm install
 
   build:
     commands:
