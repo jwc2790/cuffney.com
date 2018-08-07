@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+
+  install:
+    commands:
+      - NODE_ENV=test npm instal
+
+  build:
+    commands:
+      - npm run build
+
+artifacts:
+  files:
+    - "**/*"
