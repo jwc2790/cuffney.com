@@ -1,0 +1,77 @@
+## #############################################################################
+## Cloudfomation template
+##
+## v2.cuffney.com
+## 
+## - static webisite (s3, cloudfront)
+## - continuous deployment (code pipeline, code build, code deploy)
+##
+## This particular project will serve as a front end for my updated portfolio.
+## This version will have a focus on CI/CD, testing, performance, CloudFormation
+## #############################################################################
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: v2.cuffney.com
+
+## #############################################################################
+## Parameters
+## #############################################################################
+
+Parameters: 
+
+  DomainName: 
+    Type: String
+    Description: s3 bucket name, and domain name
+    Default: v2.cuffney.com
+
+  AcmCertificateArn:
+    Type: String
+    Description: the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate.
+    AllowedPattern: "arn:aws:acm:.*"
+    Default: arn:aws:acm:us-east-1:255964265911:certificate/c2a1e27c-3826-48df-8894-7cb447031a7f
+
+  HostZoneId:
+    Type: String
+    Description: the route 53 hosted zone id 
+    Default: Z2FDTNDATAQYW2 
+
+  HostedZone: 
+    Type: String
+    Description: the name (domain) of the hosted zone
+    Default: cuffney.com 
+
+  WwwRedirect:
+    Type: String
+    Description: the route 53 hosted zone id
+    AllowedValues:
+      - true
+      - false
+    Default: true
+
+## #############################################################################
+## Resources
+## #############################################################################
+
+Resources:
+
+  StaticSite:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Parameters:
+        DomainName: !Ref DomainName
+        AcmCertificateArn: !Ref AcmCertificateArn
+        HostZoneId: !Ref HostZoneId
+        HostedZone: !Ref HostedZone
+        WwwRedirect: !Ref WwwRedirect
+      TemplateURL: https://s3.amazonaws.com/com.cuffney.cloudformation/static-site/template.yml
+
+## #############################################################################
+## Outputs
+## #############################################################################
+
+Outputs:
+  URL:
+    Description: The url at which you can reach the website
+    Value: !Sub 'https://${DomainName}'
+    Export:
+      Name: URL

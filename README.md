@@ -2,15 +2,19 @@
 
 > https://v2.cuffney.com 
 
-## Code Pipeline Steps
+### Requirements
 
-1. Code Build
-  - npm i (done)
-  - npm run build (done)
-  - npm run test (done)
-  - npm run cover (todo)
-  - npm run lint (todo)
-2. Code Deploy
-  - move build artificat to s3 folder
-  - 
+- Node
 
+### Protected Branches
+
+- 
+
+### Development
+
+### Deployment
+
+simply push to [master|dev] to trigger a deployment.
+
+This particular project will serve as a front end for my updated portfolio.
+This version will have a focus on CI/CD, testing, performance, CloudFormation
