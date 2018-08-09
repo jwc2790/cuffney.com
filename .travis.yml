@@ -17,20 +17,23 @@ deploy:
   skip_cleanup: true
   region: us-east-1
   local_dir: build
-  bucket: v2.cuffney.com
+  bucket: v2.cuffney.com # TODO: update to dev.cuffney.com
   on:
     branch: master
 
-- provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  skip_cleanup: true
-  region: us-east-1
-  local_dir: build
-  bucket: cuffney.com
-  on:
-    tags: true
+# TODO: test tag deployments
+# - provider: s3
+#   access_key_id: $AWS_ACCESS_KEY_ID
+#   secret_access_key: $AWS_SECRET_ACCESS_KEY
+#   skip_cleanup: true
+#   region: us-east-1
+#   local_dir: build
+#   bucket: cuffney.com
+#   on:
+#     tags: true
 
 after_deploy:
   - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+  - test $TRAVIS_BRANCH = "master" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+  # TODO: add a test to check for the existance of $TRAVIS_TAG + $TRAVIS_BRANCH == "master" so that we can invalidate the cache for the right distrobution
+  # - test $TRAVIS_BRANCH = "master" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID_STAGING --paths "/*"
