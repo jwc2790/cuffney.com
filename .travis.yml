@@ -3,17 +3,12 @@ language: node_js
 node_js:
 - "10.3.0"
 
-# cache:
-#   directories:
-#     - "node_modules"
-
 install:
 - npm install
 - pip install --user awscli
 
 script:
 - npm run build
-- ls -la build/
 
 deploy:
 - provider: s3
@@ -22,7 +17,7 @@ deploy:
   skip_cleanup: true
   region: us-east-1
   local_dir: build
-  bucket: dev.cuffney.com
+  bucket: v2.cuffney.com
   on:
     branch: master
 
@@ -38,5 +33,4 @@ deploy:
 
 after_deploy:
   - aws configure set preview.cloudfront true
-  # - test $TRAVIS_BRANCH = "master" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
-  # - test $TRAVIS_BRANCH = "staging" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_STAGING_DISTRIBUTION_ID --paths "/*"
+  # - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
