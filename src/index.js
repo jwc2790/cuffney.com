@@ -1,8 +1,16 @@
+// modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+// local
 import registerServiceWorker from './registerServiceWorker';
+
+// Components
+import App from './views/App';
+
+// global styles
+import './index.css';
+import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
