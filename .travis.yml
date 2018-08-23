@@ -11,26 +11,26 @@ script:
 - npm run build
 
 deploy:
-- provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  skip_cleanup: true
-  region: us-east-1
-  local_dir: build
-  bucket: v2.cuffney.com # TODO: update to dev.cuffney.com
-  on:
-    branch: master
-
-# TODO: test tag deployments
 # - provider: s3
 #   access_key_id: $AWS_ACCESS_KEY_ID
 #   secret_access_key: $AWS_SECRET_ACCESS_KEY
 #   skip_cleanup: true
 #   region: us-east-1
 #   local_dir: build
-#   bucket: cuffney.com
+#   bucket: dev.cuffney.com # TODO: update to dev.cuffney.com
 #   on:
-#     tags: true
+#     branch: master
+
+- provider: s3
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  skip_cleanup: true
+  region: us-east-1
+  local_dir: build
+  bucket: cuffney.com
+  on:
+    # tags: true
+    branch: master
 
 after_deploy:
   - aws configure set preview.cloudfront true
