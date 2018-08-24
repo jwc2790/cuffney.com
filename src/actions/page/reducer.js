@@ -4,7 +4,8 @@ export default (state = {}, action) => {
   switch (action.type) {
     case GET_PAGE:
       return {
-        result: action.payload,
+        slug: action.payload.slug,
+        sections: action.payload.sections,
       };
     default:
       return state;

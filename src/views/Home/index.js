@@ -12,18 +12,30 @@ class Home extends PureComponent {
     getPageBySlug('/');
   }
 
+  static renderSections(sections) {
+    return sections.map(({ id, name }) => {
+      switch (name) {
+        case 'heading':
+          return <Header key={id}>Heading</Header>;
+        case 'footer':
+          return <Header key={id}>Footer</Header>;
+        default:
+          return null;
+      }
+    });
+  }
+
   render() {
     const { sections } = this.props;
     return (
       <ResponsiveContainer>
         <Header>Home</Header>
-        {sections.map(() => <Header>Section</Header>)}
+        { Home.renderSections(sections) }
       </ResponsiveContainer>
     );
   }
 }
 
-const mapStateToProps = state => ({ ...state });
 
 Home.propTypes = {
   sections: PropTypes.arrayOf(PropTypes.object),
@@ -34,6 +46,8 @@ Home.defaultProps = {
   sections: [],
   getPageBySlug: () => [],
 };
+
+const mapStateToProps = state => ({ sections: state.page.sections });
 
 const mapDispatchToProps = dispatch => ({
   getPageBySlug: () => dispatch(getPage()),
