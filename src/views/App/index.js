@@ -7,10 +7,6 @@ import About from '../About';
 import Contact from '../Contact';
 import NotFound from '../NotFound';
 
-// const App = () => (
-//   <h1>hello world</h1>
-// );
-
 const App = () => (
   <Router>
     <Switch>
