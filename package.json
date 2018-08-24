@@ -17,7 +17,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --fix src/**/*.js",
-    "cover": "npm run test -- --coverage"
+    "cover": "npm run test -- --coverage",
+    "verify": "npm run lint && npm run cover"
   },
   "devDependencies": {
     "eslint": "^5.4.0",
