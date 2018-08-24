@@ -6,8 +6,9 @@ const MobileContainer = (props) => {
   const { children } = props;
 
   return (
-    <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
+    <Responsive maxWidth={Responsive.onlyComputer.minWidth}>
       {children}
+      <h1>mobile</h1>
     </Responsive>
   );
 };

@@ -9,7 +9,6 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './views/App';
 
 // global styles
-import './index.css';
 import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render((
