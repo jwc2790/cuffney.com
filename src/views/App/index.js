@@ -1,11 +1,16 @@
 import React from 'react';
-import { Header } from 'semantic-ui-react';
-import ResponsiveContainer from '../../components/ResponsiveContainer';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import NotFound from '../NotFound';
+import Home from '../Home';
 
 const App = () => (
-  <ResponsiveContainer>
-    <Header>Homepage</Header>
-  </ResponsiveContainer>
+  <Router>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="*" component={NotFound} />
+    </Switch>
+  </Router>
 );
 
 export default App;
