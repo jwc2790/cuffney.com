@@ -6,7 +6,7 @@ import { Header } from 'semantic-ui-react';
 import ResponsiveContainer from '../../components/ResponsiveContainer';
 import getPage from '../../actions/page/action';
 
-class Home extends PureComponent {
+export class Home extends PureComponent {
   componentWillMount() {
     const { getPageBySlug } = this.props;
     getPageBySlug('/');

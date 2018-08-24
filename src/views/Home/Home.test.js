@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './index';
+import configureStore from 'redux-mock-store';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Home />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import { Home } from './index';
+
+describe('Home Page', () => {
+  const initialState = {};
+  const mockStore = configureStore();
+  let store;
+  beforeEach(() => {
+    store = mockStore(initialState);
+  });
+
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<Home store={store} />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
 });

@@ -8,8 +8,7 @@ install:
 - pip install --user awscli
 
 before_script:
-- npm run lint
-- npm run cover
+- npm run verify
 
 script:
 - npm run build
