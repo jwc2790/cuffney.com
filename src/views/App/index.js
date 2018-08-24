@@ -3,19 +3,26 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomeView from '../Home';
 import Work from '../Work';
-import About from '../About';
 import Contact from '../Contact';
 import NotFound from '../NotFound';
 
+import Footer from '../../components/Footer';
+
+import './App.css';
+
 const App = () => (
   <Router>
-    <Switch>
-      <Route exact path="/" component={HomeView} />
-      <Route exact path="/work" component={Work} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/contact" component={Contact} />
-      <Route path="*" component={NotFound} />
-    </Switch>
+    <div className="site">
+      <div className="site-content">
+        <Switch>
+          <Route exact path="/" component={HomeView} />
+          <Route exact path="/work" component={Work} />
+          <Route exact path="/contact" component={Contact} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </div>
+      <Footer />
+    </div>
   </Router>
 );
 
