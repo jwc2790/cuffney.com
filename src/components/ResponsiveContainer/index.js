@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DesktopContainer from '../DesktopContainer';
 import MobileContainer from '../MobileContainer';
+import StickyFooter from '../StickyFooter';
 
 const ResponsiveContainer = ({ children }) => (
-  <div>
+  <StickyFooter>
     <DesktopContainer>{children}</DesktopContainer>
     <MobileContainer>{children}</MobileContainer>
-  </div>
+  </StickyFooter>
 );
 
 ResponsiveContainer.propTypes = {

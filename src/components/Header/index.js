@@ -1,26 +1,29 @@
 import React, { PureComponent } from 'react';
 // import PropTypes from 'prop-types';
 import {
-  Segment, Container, Visibility, Menu, Button,
+  Segment, Container, Visibility, Menu,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 class Header extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-  state = {}
+  hideFixedMenu() { this.setState({ fixed: false }); }
 
-  hideFixedMenu = () => this.setState({ fixed: false })
-  showFixedMenu = () => this.setState({ fixed: true })
+  showFixedMenu() { this.setState({ fixed: true }); }
 
   render() {
-    const { fixed } = this.state
+    const { fixed } = this.state;
 
     return (
       <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
+        once={false}
+        onBottomPassed={this.showFixedMenu}
+        onBottomPassedReverse={this.hideFixedMenu}
+      >
         <Segment
           inverted
           textAlign="center"
@@ -34,9 +37,9 @@ class Header extends PureComponent {
             size="large"
           >
             <Container>
-              <Menu.Item as={Link} to={'/'} active>Home</Menu.Item>
-              <Menu.Item as={Link} to={'/work'}>Work</Menu.Item>
-              <Menu.Item as={Link} to={'/contact'}>Contact</Menu.Item>
+              <Menu.Item as={Link} to="/" active>Home</Menu.Item>
+              <Menu.Item as={Link} to="/work">Work</Menu.Item>
+              <Menu.Item as={Link} to="/contact">Contact</Menu.Item>
             </Container>
           </Menu>
         </Segment>
