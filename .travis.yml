@@ -7,6 +7,11 @@ install:
 - npm install
 - pip install --user awscli
 
+before_script:
+- npm run test
+- npm run cover
+# - NODE_PATH=src react-scripts test --env=jsdom
+
 script:
 - npm run build
 

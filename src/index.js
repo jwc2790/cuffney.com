@@ -20,7 +20,7 @@ ReactDOM.render((
       <Route exact path="/" component={App} />
       <Route exact path="/work" component={App} />
       <Route exact path="/blog" component={App} />
-      <Route path="*" component={ NotFound } />
+      <Route path="*" component={NotFound} />
     </Switch>
   </Router>
 ), document.getElementById('root'));
