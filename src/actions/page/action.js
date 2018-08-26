@@ -6,8 +6,7 @@ export default slug => (dispatch) => {
     payload: {
       slug,
       sections: [
-        { name: 'heading', id: '1234-1234' },
-        { name: 'footer', id: '1234-1235' },
+        { name: 'heading', id: '1234-1234', header: 'Joe Cuffney' },
       ],
     },
   });

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
 import ResponsiveContainer from '../../components/ResponsiveContainer';
 import getPage from '../../actions/page/action';
+import MastheadSection from '../../components/MastheadSection';
 
 export class Home extends PureComponent {
   componentWillMount() {
@@ -13,10 +14,11 @@ export class Home extends PureComponent {
   }
 
   static renderSections(sections) {
-    return sections.map(({ id, name }) => {
+    return sections.map((section) => {
+      const { id, name } = section;
       switch (name) {
         case 'heading':
-          return <Header key={id}>Heading</Header>;
+          return <MastheadSection {...section} />;
         case 'footer':
           return <Header key={id}>Footer</Header>;
         default:
