@@ -2,10 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Header } from 'semantic-ui-react';
+// import { Header as SemanticHeader } from 'semantic-ui-react';
+import Header from '../../components/Header';
 import ResponsiveContainer from '../../components/ResponsiveContainer';
 import getPage from '../../actions/page/action';
 import MastheadSection from '../../components/MastheadSection';
+import ImageSection from '../../components/ImageSection';
+import TextSection from '../../components/TextSection';
+import GridItemsSection from '../../components/GridItemsSection';
 
 export class Home extends PureComponent {
   componentWillMount() {
@@ -17,10 +21,14 @@ export class Home extends PureComponent {
     return sections.map((section) => {
       const { id, name } = section;
       switch (name) {
-        case 'heading':
+        case 'masthead':
           return <MastheadSection {...section} />;
-        case 'footer':
-          return <Header key={id}>Footer</Header>;
+        case 'text':
+          return <TextSection key={id} {...section} />;
+        case 'grid-items':
+          return <GridItemsSection key={id} {...section} />;
+        case 'image':
+          return <ImageSection {...section} />;
         default:
           return null;
       }
@@ -31,7 +39,7 @@ export class Home extends PureComponent {
     const { sections } = this.props;
     return (
       <ResponsiveContainer>
-        <Header>Home</Header>
+        <Header />
         { Home.renderSections(sections) }
       </ResponsiveContainer>
     );

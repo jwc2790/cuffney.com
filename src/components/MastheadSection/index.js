@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Segment, Image, Header } from 'semantic-ui-react';
 
 const MastheadSection = (props) => {
-  const { header } = props;
+  const { header, src } = props;
   return (
-    <Segment>
-      <Image src="https://placehold.it/1600x400" fluid />
+    <Segment style={{ padding: 0, margin: 0, maxHeight: '100vh' }}>
+      <Image src={src} fluid />
       <Header
         as="h1"
         style={{
@@ -15,6 +15,10 @@ const MastheadSection = (props) => {
           top: '50%',
           left: '50%',
           margin: 0,
+          fontFamily: 'MontanaTypefaceRough',
+          color: '#fff',
+          fontSize: '8rem',
+          letterSpacing: '10px',
         }}
       >
         { header }
@@ -25,10 +29,12 @@ const MastheadSection = (props) => {
 
 MastheadSection.propTypes = {
   header: PropTypes.string,
+  src: PropTypes.string,
 };
 
 MastheadSection.defaultProps = {
-  header: '',
+  header: 'Example Header',
+  src: 'http://placehold.it/1600x900',
 };
 
 export default MastheadSection;

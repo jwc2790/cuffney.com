@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 class Header extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { fixed: true };
+    this.hideFixedMenu = this.hideFixedMenu.bind(this);
+    this.showFixedMenu = this.showFixedMenu.bind(this);
   }
 
   hideFixedMenu() { this.setState({ fixed: false }); }
