@@ -1,0 +1,65 @@
+/* mobile first */
+.home_wrapper {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100vh;
+  background: url("/imgs/masthead.jpg") center left / cover no-repeat;
+}
+
+.home_flex-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+
+.home_flex-item {
+  flex: 1;
+}
+
+.home_avatar {
+   margin: auto;
+   display: block;
+   border-radius: 50%;
+   width: 150px;
+   height: 150px;
+}       
+
+.home_masthead {
+  font-size: 2rem;
+  letter-spacing: 10px;
+  color: #fff;
+  text-align: center;
+}       
+
+.home_subheader {
+  font-size: 1rem;
+  letter-spacing: 10px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}       
+
+.home_nav-link {
+  font-size: 1rem;
+  letter-spacing: 10px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin: auto;
+  display: block;
+}     
+
+/* tablet */
+@media only screen and (min-width: 76px) {
+  
+}
+
+/* desktop */
+@media only screen and (min-width: 1280px) {
+  
+}
