@@ -11,7 +11,7 @@
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
     "enzyme": "^3.4.4",
-    "enzyme-adapter-react-16": "^1.2.0",   
+    "enzyme-adapter-react-16": "^1.2.0",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.3"
@@ -37,7 +37,7 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "statements":   0,
+        "statements": 0,
         "branches": 0,
         "lines": 0,
         "functions": 0
