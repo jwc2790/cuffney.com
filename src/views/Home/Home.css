@@ -3,15 +3,14 @@
   padding: 0;
   margin: 0;
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
   background: url("/imgs/masthead.jpg") center left / cover no-repeat;
+  overflow: hidden;
 }
 
 .home_flex-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
   height: 100%;
 }
 
@@ -30,9 +29,10 @@
 
 .home_masthead {
   font-size: 2rem;
-  letter-spacing: 10px;
+  letter-spacing: 0.625rem;
   color: #fff;
   text-align: center;
+  margin-right: 0.625rem;
 }       
 
 .home_subheader {
@@ -41,18 +41,38 @@
   color: #fff;
   text-align: center;
   text-transform: uppercase;
-}       
+  line-height: 1.5rem;
+  margin: 0 0.625rem 2rem 1rem;
+}    
+
+.home_hr{
+  color: #fff;
+  width: 120px;
+  margin: 0 auto 1rem;
+}
+
+.home_hr:last-child {
+  margin: 0 auto 1rem;
+}
+
+.home_nav {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
 
 .home_nav-link {
   font-size: 1rem;
-  letter-spacing: 10px;
+  letter-spacing: 0.625rem;
   color: #fff;
   text-align: center;
   text-transform: uppercase;
-  text-decoration: underline;
-  margin: auto;
-  display: block;
-}     
+  text-align: center;
+  display: inline-block;
+  padding: 0 10px;
+  margin-bottom: 1rem;
+  margin-right: -0.625rem; 
+} 
 
 /* tablet */
 @media only screen and (min-width: 76px) {
@@ -61,5 +81,7 @@
 
 /* desktop */
 @media only screen and (min-width: 1280px) {
-  
+  .home_wrapper {
+    background: url("/imgs/masthead.jpg") center right / cover no-repeat;
+  } 
 }

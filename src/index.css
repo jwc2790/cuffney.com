@@ -1,20 +1,4 @@
-@import url("//hello.myfonts.net/count/376ce3");
-
-  
-@font-face {
-  font-family: 'MontanaTypeface';
-  src: url('/fonts/MontanaTypeface/montana.eot');
-  src: url('/fonts/MontanaTypeface/montana.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/MontanaTypeface/montana.woff2') format('woff2')
-  ,url('/fonts/MontanaTypeface/montana.woff') format('woff'),
-  url('/fonts/MontanaTypeface/montana.ttf') format('truetype');
-}
- 
-@font-face {
-  font-family: 'MontanaTypefaceRough';
-  src: url('/fonts/MontanaTypefaceRough/montana-rough.eot');
-  src: url('/fonts/MontanaTypefaceRough/montana-rough.eot?#iefix') format('embedded-opentype'),
-  url('/fonts/MontanaTypefaceRough/montana-rough.woff2') format('woff2')
-  ,url('/fonts/MontanaTypefaceRough/montana-rough.woff') format('woff'),
-  url('/fonts/MontanaTypefaceRough/montana-rough.ttf') format('truetype');
+body, html {
+  margin: 0;
+  padding: 0;
 }
