@@ -5,20 +5,18 @@ import { Container } from 'semantic-ui-react';
 
 import './Home.css';
 
-const Home = () => {
-  return (
-    <Container fluid className="home_wrapper">
-      <div className="home_flex-wrapper">
-        <div className="home_flex-item">
-          <img className="home_avatar" src="/imgs/avatar.jpg" alt="" />
-          <h1 className="home_masthead">Joe Cuffney</h1>
-          <h3 className="home_subheader">Sr. Software Engineer.</h3>
-          {/* <Link className="home_nav-link" to="/work">See my Work.</Link> */}
-        </div>
+const Home = () => (
+  <Container fluid className="home_wrapper">
+    <div className="home_flex-wrapper">
+      <div className="home_flex-item">
+        <img className="home_avatar" src="/imgs/avatar.jpg" alt="" />
+        <h1 className="home_masthead">Joe Cuffney</h1>
+        <h3 className="home_subheader">Sr. Software Engineer.</h3>
+        {/* <Link className="home_nav-link" to="/work">See my Work.</Link> */}
       </div>
-    </Container>
-  );
-};
+    </div>
+  </Container>
+);
 
 
 Home.propTypes = {

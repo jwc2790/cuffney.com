@@ -1,11 +1,10 @@
 import React from 'react';
 import { Header } from 'semantic-ui-react';
-import ResponsiveContainer from '../../components/ResponsiveContainer';
 
 const Work = () => (
-  <ResponsiveContainer>
+  <div>
     <Header>Work</Header>
-  </ResponsiveContainer>
+  </div>
 );
 
 export default Work;
