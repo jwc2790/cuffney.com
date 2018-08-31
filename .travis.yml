@@ -14,15 +14,6 @@ script:
 - npm run build
 
 deploy:
-# - provider: s3
-#   access_key_id: $AWS_ACCESS_KEY_ID
-#   secret_access_key: $AWS_SECRET_ACCESS_KEY
-#   skip_cleanup: true
-#   region: us-east-1
-#   local_dir: build
-#   bucket: dev.cuffney.com # TODO: update to dev.cuffney.com
-#   on:
-#     branch: master
 
 - provider: s3
   access_key_id: $AWS_ACCESS_KEY_ID
@@ -32,15 +23,8 @@ deploy:
   local_dir: build
   bucket: cuffney.com
   on:
-    # tags: true
     branch: master
 
 after_deploy:
   - aws configure set preview.cloudfront true
   - test $TRAVIS_BRANCH = "master" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
-  # TODO: add a test to check for the existance of $TRAVIS_TAG + $TRAVIS_BRANCH == "master" so that we can invalidate the cache for the right distrobution
-  # - test $TRAVIS_BRANCH = "master" && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID_STAGING --paths "/*"
-
-notifications:
-  slack:
-    secure: PkjcmS8wXZ3JmRV5edQ0ykXYWISPMmQBYvPrZFCaea6JovhhWnA4W48gVR0M5kK46NfvLeo30ZbJ2qWnMBXSla9xEiLn8851Wi3XXztCzKJ+81Utjzm8QCzqi9w7fMdg8hFURYj71nWG0J53fKMRdW1fifpU+cc1Lf/X123q+RI6aPyJVblWC4fQcyQV+0Gh8pm0KbnnL3USRvESJYxsPE0OdFo6aerzPl0wG2k7DlGAFL6dwMsTqAxYzpXGGfvd2UFdx7W3OXjjmmk9BS/C++3r3i/2u5G41p25NksZag/DmUFpPUg4inv9foRh7HYHrVWKzGnl3TVO9zVlK2ymq+hIPtVt5el3iA+pHkAGKEv5Wud71NW0QfwdX10mbLgVfRtUGXRJAuLTj4VKlFgYyxvPwx8/q5BhulxJr/KQMakIJVNX0iabXyTvXXLhI27SrcBwOEy8f5p9Bkbo3ptkvgWMkyQmkR7RavvfsDxRwprFx1dEFT1yJ9FPAJOAg3ZsZvZ1QYTILfYSqHe2zmt6nVpq9vRoWlCufg0hfvE+VYGOI65EjegyJihXLYc9FbEWFd3fhqMH63AkA+eFOehRqTLNZRgWbVd5lIxa8DyonvyHHbIFzm/K9ut8XxCZRaTm+oGZ4e2tT/lImZwUvcvIZcBD5+aXq2BBjBEpjnD0hcQ=
