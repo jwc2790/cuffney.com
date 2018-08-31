@@ -45,35 +45,6 @@
   margin: 0 0.625rem 2rem 1rem;
 }    
 
-.home_hr{
-  color: #fff;
-  width: 120px;
-  margin: 0 auto 1rem;
-}
-
-.home_hr:last-child {
-  margin: 0 auto 1rem;
-}
-
-.home_nav {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0;
-}
-
-.home_nav-link {
-  font-size: 1rem;
-  letter-spacing: 0.625rem;
-  color: #fff;
-  text-align: center;
-  text-transform: uppercase;
-  text-align: center;
-  display: inline-block;
-  padding: 0 10px;
-  margin-bottom: 1rem;
-  margin-right: -0.625rem; 
-} 
-
 /* tablet */
 @media only screen and (min-width: 76px) {
   

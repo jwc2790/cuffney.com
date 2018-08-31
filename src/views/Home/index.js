@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Nav from '../../components/Nav';
 
 import './Home.css';
 
@@ -10,12 +11,7 @@ const Home = () => (
         <img className="home_avatar" src="/imgs/avatar.jpg" alt="" />
         <h1 className="home_masthead">Joe Cuffney.</h1>
         <h3 className="home_subheader">Sr. Software Engineer.</h3>
-        <hr className="home_hr" />
-        <p className="home_nav">
-          <Link className="home_nav-link" to="/resume">Resume.</Link>
-          <Link className="home_nav-link" to="/work">Work.</Link>
-        </p>
-        <hr className="home_hr" />
+        <Nav />
       </div>
     </div>
   </div>

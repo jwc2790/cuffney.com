@@ -1,9 +1,12 @@
 import React from 'react';
-import { Header } from 'semantic-ui-react';
+import Nav from '../../components/Nav';
+
+import './NotFound.css';
 
 const NotFound = () => (
-  <div>
-    <Header>NotFound</Header>
+  <div className="not-found">
+    <h1>404. Not Found.</h1>
+    <Nav />
   </div>
 );
 
