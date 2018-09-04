@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './index';
+import Nav from './index';
 
-describe('App', () => {
+describe('Nav', () => {
   it('renders as expected', () => {
-    shallow(<App />);
+    shallow(<Nav active="/" />);
   });
 });

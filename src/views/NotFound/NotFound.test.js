@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './index';
+import NotFound from './index';
 
-describe('App', () => {
+describe('Not Found', () => {
   it('renders as expected', () => {
-    shallow(<App />);
+    shallow(<NotFound />);
   });
 });

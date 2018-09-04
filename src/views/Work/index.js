@@ -15,7 +15,9 @@ const Work = (props) => {
 };
 
 Work.propTypes = {
-  location: propTypes.string.isRequired,
+  location: propTypes.shape({
+    pathname: propTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Work;

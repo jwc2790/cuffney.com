@@ -15,7 +15,10 @@ const Resume = (props) => {
 };
 
 Resume.propTypes = {
-  location: propTypes.string.isRequired,
+  location: propTypes.shape({
+    pathname: propTypes.string.isRequired,
+  }).isRequired,
 };
+
 
 export default Resume;
