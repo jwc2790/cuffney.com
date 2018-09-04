@@ -22,6 +22,7 @@ const renderProjectGrid = projs => projs.map((project) => {
     src,
     to,
     description,
+    slug,
   } = project;
   let linkComponent = null;
   let linkTarget = null;
@@ -33,8 +34,8 @@ const renderProjectGrid = projs => projs.map((project) => {
   }
 
   return (
-    <Grid.Column mobile={16} tablet={8} computer={4}>
-      <Card as={linkComponent} to={to} href={to} target={ linkTarget }>
+    <Grid.Column mobile={16} tablet={8} computer={4} key={slug}>
+      <Card as={linkComponent} to={to} href={to} target={linkTarget}>
         <Image src={src} />
         <Card.Content>
           <Card.Header>{ title }</Card.Header>
