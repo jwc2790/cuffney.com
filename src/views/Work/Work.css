@@ -11,3 +11,17 @@
 .work h1 {
   margin-top: 3rem;
 }
+
+.work .grid {
+  display: grid;
+  grid-template-columns: 80vw;
+  column-gap: 1rem;
+}
+
+@media(min-width: 1024px) {
+  .work .grid {
+    display: grid;
+    grid-template-columns: 400px 400px;
+    column-gap: 1rem;
+  } 
+}

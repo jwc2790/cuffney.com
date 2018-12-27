@@ -8,10 +8,10 @@ import './Work.css';
 const Work = (props) => {
   const { location: { pathname } } = props;
   return (
-    <div className="resume">
+    <div className="work">
       <h1>Work.</h1>
       <Nav active={pathname} />
-      <div className="container">
+      <div className="grid">
         { projects.map(project => <Card {...project} key={project.slug} />) }
       </div>
     </div>

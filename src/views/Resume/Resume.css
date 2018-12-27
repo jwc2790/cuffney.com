@@ -8,6 +8,16 @@
   width: 100vw;
 }
 
+.resume iframe {
+  width: 100%;
+  height: auto;
+  min-width: 100vh;
+}
+
+.resume .content {
+  width: 80vw;
+}
+
 .resume h1 {
   font-size: 2rem;
   letter-spacing: 0.625rem;

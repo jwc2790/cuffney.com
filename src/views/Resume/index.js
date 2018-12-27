@@ -8,16 +8,26 @@ const Resume = (props) => {
   const { location: { pathname } } = props;
   return (
     <div className="resume">
+      <base target="_blank" />
+
       <h1>Resume.</h1>
       <Nav active={pathname} />
       <div className="content">
-        <h1>Joe Cuffney.</h1>
-        <h2>Education.</h2>
-        <p>Rochester Institute of Technology.</p>
-        <p>B.S, Computer Science.</p>
-        <h2>Experience.</h2>
-        <p>Nike.</p>
-        <p>The Program PDX.</p>
+        <iframe
+          src="https://resume.cuffney.com"
+          title="resume"
+          frameBorder="0"
+          id="resume"
+          onLoad={() => {
+            console.log('hi');
+            const resume = document.getElementById('resume');
+            console.log(resume);
+            if (resume) {
+              resume.height = '0px';
+              resume.height = `${resume.contentWindow.document.body.scrollHeight}px`;
+            }
+          }}
+        />
       </div>
     </div>
   );
