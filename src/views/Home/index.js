@@ -10,10 +10,10 @@ const Home = (props) => {
     <div className="home_wrapper">
       <div className="home_flex-wrapper">
         <div className="home_flex-item">
-          <img className="home_avatar" src="/imgs/avatar.jpg" alt="" />
+          <img className="home_avatar" src="/imgs/avatar.jpg" alt="Joe Cuffney" />
           <h1 className="home_masthead">Joe Cuffney.</h1>
           <h3 className="home_subheader">Sr. Software Engineer.</h3>
-          { true && <Nav active={pathname} /> }
+          <Nav active={pathname} />
         </div>
       </div>
     </div>

@@ -7,6 +7,12 @@
   min-height: 100vh;
 }
 
+.resume a.download {
+  border: 1px solid white;
+  padding: 1rem;
+  color: #fff;
+}
+
 .resume iframe {
   width: 100%;
   height: auto;

@@ -8,10 +8,9 @@ const Resume = (props) => {
   const { location: { pathname } } = props;
   return (
     <div className="resume">
-      <base target="_blank" />
-
       <h1>Resume.</h1>
       <Nav active={pathname} />
+      <a className="download" href="https://resume.cuffney.com/resume.md" download>Download PDF</a>
       <div className="content">
         <iframe
           src="https://resume.cuffney.com"
