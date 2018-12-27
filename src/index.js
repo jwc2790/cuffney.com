@@ -2,11 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Components
+import App from 'views/App';
+
 // local
 import registerServiceWorker from './registerServiceWorker';
-
-// Components
-import App from './views/App';
 
 // global styles
 import './index.css';

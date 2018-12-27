@@ -1,7 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Nav from '../../components/Nav';
-import Card from '../../components/Card';
+import Card from 'components/Card';
+import Nav from 'components/Nav';
+
 import { projects } from './projects';
 import './Work.css';
 

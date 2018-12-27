@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Nav from '../../components/Nav';
+import Nav from 'components/Nav';
 
 import './Resume.css';
 
