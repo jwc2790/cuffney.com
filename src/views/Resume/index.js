@@ -17,16 +17,6 @@ const Resume = (props) => {
           src="https://resume.cuffney.com"
           title="resume"
           frameBorder="0"
-          id="resume"
-          onLoad={() => {
-            console.log('hi');
-            const resume = document.getElementById('resume');
-            console.log(resume);
-            if (resume) {
-              resume.height = '0px';
-              resume.height = `${resume.contentWindow.document.body.scrollHeight}px`;
-            }
-          }}
         />
       </div>
     </div>

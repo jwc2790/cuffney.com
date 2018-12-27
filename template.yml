@@ -1,7 +1,7 @@
 ## #############################################################################
 ## Cloudfomation template
 ##
-## v2.cuffney.com
+## cuffney.com
 ## 
 ## - static webisite (s3, cloudfront)
 ## - continuous deployment (code pipeline, code build, code deploy)
@@ -11,7 +11,7 @@
 ## #############################################################################
 
 AWSTemplateFormatVersion: 2010-09-09
-Description: v2.cuffney.com
+Description: cuffney.com
 
 ## #############################################################################
 ## Parameters
@@ -22,7 +22,7 @@ Parameters:
   DomainName: 
     Type: String
     Description: s3 bucket name, and domain name
-    Default: v2.cuffney.com
+    Default: cuffney.com
 
   AcmCertificateArn:
     Type: String
@@ -58,11 +58,16 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       Parameters:
-        DomainName: !Ref DomainName
-        AcmCertificateArn: !Ref AcmCertificateArn
-        HostZoneId: !Ref HostZoneId
-        HostedZone: !Ref HostedZone
-        WwwRedirect: !Ref WwwRedirect
+        DomainName: 
+          Fn::Ref: DomainName
+        AcmCertificateArn: 
+          Fn::Ref: AcmCertificateArn
+        HostZoneId: 
+          Rn::Ref: HostZoneId
+        HostedZone: 
+          Fn::Ref: HostedZone
+        WwwRedirect: 
+          Fn:Ref: WwwRedirect
       TemplateURL: https://s3.amazonaws.com/com.cuffney.cloudformation/static-site/template.yml
 
 ## #############################################################################
@@ -72,6 +77,7 @@ Resources:
 Outputs:
   URL:
     Description: The url at which you can reach the website
-    Value: !Sub 'https://${DomainName}'
+    Value: 
+      Fn::Sub: 'https://${DomainName}'
     Export:
       Name: URL
