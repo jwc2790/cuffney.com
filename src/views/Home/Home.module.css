@@ -1,5 +1,5 @@
 /* mobile first */
-.home_wrapper {
+.wrapper {
   padding: 0;
   margin: 0;
   height: 100vh;
@@ -8,18 +8,17 @@
   overflow: hidden;
 }
 
-.home_flex-wrapper {
+.flexWrapper {
   display: flex;
   align-items: center;
   height: 100%;
 }
 
-
-.home_flex-item {
+.flexItem {
   flex: 1;
 }
 
-.home_avatar {
+.avatar {
    margin: auto;
    display: block;
    border-radius: 50%;
@@ -27,7 +26,7 @@
    height: 150px;
 }       
 
-.home_masthead {
+.masthead {
   font-size: 2rem;
   letter-spacing: 0.625rem;
   color: #fff;
@@ -35,7 +34,7 @@
   margin-right: 0.625rem;
 }       
 
-.home_subheader {
+.subheader {
   font-size: 1rem;
   letter-spacing: 10px;
   color: #fff;
@@ -45,14 +44,17 @@
   margin: 0 0.625rem 2rem 1rem;
 }    
 
-/* tablet */
-@media only screen and (min-width: 76px) {
-  
-}
-
 /* desktop */
 @media only screen and (min-width: 1280px) {
-  .home_wrapper {
+  .wrapper {
     background: url("/imgs/masthead.jpg") center right / cover no-repeat;
   } 
+}
+
+.iconLinks {
+  text-align: center;
+}
+
+.icon {
+  margin: 0.5rem;
 }

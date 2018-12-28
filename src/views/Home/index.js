@@ -1,18 +1,27 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Nav from 'components/Nav';
 
-import './Home.css';
+import styles from './Home.module.css';
 
 const Home = (props) => {
   const { location: { pathname } } = props;
   return (
-    <div className="home_wrapper">
-      <div className="home_flex-wrapper">
-        <div className="home_flex-item">
-          <img className="home_avatar" src="/imgs/avatar.jpg" alt="Joe Cuffney" />
-          <h1 className="home_masthead">Joe Cuffney.</h1>
-          <h3 className="home_subheader">Sr. Software Engineer.</h3>
+    <div className={styles.wrapper}>
+      <div className={styles.flexWrapper}>
+        <div className={styles.flexItem}>
+          <img className={styles.avatar} src="/imgs/avatar.jpg" alt="Joe Cuffney" />
+          <h1 className={styles.masthead}>Joe Cuffney.</h1>
+          <h3 className={styles.subheader}>Sr. Software Engineer.</h3>
+          <p className={styles.iconLinks}>
+            <a href="https://www.linkedin.com/in/cuffney/" className={styles.icon} target="_blank" rel="noopener noreferrer">
+              <FaLinkedin color="white" size="2em" />
+            </a>
+            <a href="https://github.com/jwc2790" className={styles.icon} target="_blank" rel="noopener noreferrer">
+              <FaGithub color="white" size="2em" />
+            </a>
+          </p>
           <Nav active={pathname} />
         </div>
       </div>
