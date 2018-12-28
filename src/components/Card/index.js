@@ -1,12 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import './Card.css';
-
 const Card = (props) => {
   const {
     title,
-    description,
     src,
     slug,
   } = props;
@@ -15,7 +12,6 @@ const Card = (props) => {
       <img src={src} alt={slug} />
       <div>
         <h3>{ title }</h3>
-        <p>{ description }</p>
       </div>
     </div>
   );

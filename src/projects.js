@@ -2,14 +2,20 @@ const projects = [
   {
     slug: 'tandem',
     src: '/imgs/work/tandem.png',
-    title: 'Tandem Personal Training',
+    title: 'Tandem Personal Training - Nike',
     to: 'https://tandempersonaltraining.com',
   },
   {
     slug: 'cultivator',
     src: '/imgs/work/cultivator.jpg',
-    title: 'Cultivator',
+    title: 'Cultivator - Nike',
     to: '/internal',
+  },
+  {
+    slug: 'led-by-light',
+    src: '/imgs/work/ledbylight.jpg',
+    title: 'Led Lenser | Led By Light',
+    to: 'https://www.ledlenserusa.com/ledbylight.html',
   },
   {
     slug: 'discover-klamath',
@@ -27,13 +33,9 @@ const projects = [
     slug: 'tree-haus',
     src: '/imgs/work/treehaus.jpg',
     title: 'Tree Haus',
+    to: 'https://github.com/jwc2790/tree-haus',
   },
-  {
-    slug: 'led-by-light',
-    src: '/imgs/work/ledbylight.jpg',
-    title: 'Led Lenser | Led By Light',
-    to: 'https://www.ledlenserusa.com/ledbylight.html',
-  },
+
   // {
   //   slug: 'marathon-kids',
   //   src: 'http://placehold.it/400x250',

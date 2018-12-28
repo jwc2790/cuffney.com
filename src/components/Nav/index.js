@@ -2,12 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import './Nav.css';
+import styles from './Nav.module.css';
 
 const Nav = (props) => {
   const { active } = props;
   return (
-    <div className="nav">
+    <div className={styles.nav}>
       <hr />
       <p>
         { active !== '/' && <Link to="/">Home.</Link>}
