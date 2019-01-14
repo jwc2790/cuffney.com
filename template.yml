@@ -28,7 +28,7 @@ Parameters:
     Type: String
     Description: the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate.
     AllowedPattern: "arn:aws:acm:.*"
-    Default: arn:aws:acm:us-east-1:255964265911:certificate/c2a1e27c-3826-48df-8894-7cb447031a7f
+    Default: arn:aws:acm:us-east-1:255964265911:certificate/3a6c2c22-cb43-4c9b-9462-cf261b498eea
 
   HostZoneId:
     Type: String
