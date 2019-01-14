@@ -59,15 +59,15 @@ Resources:
     Properties:
       Parameters:
         DomainName: 
-          Fn::Ref: DomainName
+          Ref: DomainName
         AcmCertificateArn: 
-          Fn::Ref: AcmCertificateArn
+          Ref: AcmCertificateArn
         HostZoneId: 
-          Rn::Ref: HostZoneId
+          Ref: HostZoneId
         HostedZone: 
-          Fn::Ref: HostedZone
+          Ref: HostedZone
         WwwRedirect: 
-          Fn:Ref: WwwRedirect
+          Ref: WwwRedirect
       TemplateURL: https://s3.amazonaws.com/com.cuffney.cloudformation/static-site/template.yml
 
 ## #############################################################################
