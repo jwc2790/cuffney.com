@@ -29,6 +29,14 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
+          name: Install PIP
+          command: sudo apt-get install python-pip python-dev
+
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - run:
           name: validate cloudformation template
           command: aws cloudformation validate-template \
             --template-body file://template.yml
@@ -37,19 +45,14 @@ jobs:
           name: build
           command: npm run build
 
-      # run tests!
       - run:
           name: test
           command: yarn test
-
-      # TODO: can pip/awscli be cached?
+      
       - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
-
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
+          name: deploy infrastructure
+          command: aws cloudformation update-stack \
+            --template-body file://template.yml
 
       - deploy:
           name: deploy
