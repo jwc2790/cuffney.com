@@ -49,13 +49,15 @@ jobs:
       - deploy:
           name: deploy
           command: |
-            # if [ "${CIRCLE_BRANCH}" = "master" ]; then
-            aws s3 sync ./build s3://cuffney.com --delete --region=us-east-1
-            # else
-            #   echo "Not master branch, dry run only"
-            # fi
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+              aws s3 sync ./build s3://cuffney.com --delete --region=us-east-1
+            else
+              echo "Not master branch, dry run only"
+            fi
 
-      # - run:
-      #   name: Create CloudFront Invalidation
-      #   command: aws cloudfront create-invalidation \
-      #     --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+      - run:
+        name: Create CloudFront Invalidation
+        command: |
+          aws cloudfront create-invalidation \
+          --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+          --paths "/*"
