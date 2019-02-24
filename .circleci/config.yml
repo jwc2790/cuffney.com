@@ -46,10 +46,6 @@ jobs:
           name: Install awscli
           command: sudo pip install awscli
 
-      - run:
-          name: bleh
-          command: pwd && ls -la
-
       - deploy:
           name: deploy
           command: |
