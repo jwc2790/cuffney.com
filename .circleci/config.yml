@@ -55,9 +55,9 @@ jobs:
               echo "Not master branch, dry run only"
             fi
 
-      - run:
-        name: Create CloudFront Invalidation
-        command: |
-          aws cloudfront create-invalidation \
-          --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
-          --paths "/*"
+      - deploy:
+          name: Create CloudFront Invalidation
+          command: |
+            aws cloudfront create-invalidation \
+            --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+            --paths "/*"
