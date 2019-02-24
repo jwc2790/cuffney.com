@@ -38,9 +38,11 @@ jobs:
           name: test
           command: yarn test
 
+      # TODO: can pip/awscli be cached?
       - run:
           name: Install PIP
           command: sudo apt-get install python-pip python-dev
+
       - run:
           name: Install awscli
           command: sudo pip install awscli
@@ -49,7 +51,7 @@ jobs:
           name: deploy
           command: |
             # if [ "${CIRCLE_BRANCH}" = "master" ]; then
-            aws s3 sync ./build s3://cuffney.com --delete
+            aws s3 sync ${source}/build s3://cuffney.com --delete
             # else
             #   echo "Not master branch, dry run only"
             # fi
