@@ -34,4 +34,15 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: yarn test
+      - run:
+          name: test
+          command: yarn test
+
+      - deploy:
+          name: deploy
+          command: |
+            # if [ "${CIRCLE_BRANCH}" = "master" ]; then
+            aws s3 sync ./build s3://cuffney.com --delete
+            # else
+            #   echo "Not master branch, dry run only"
+            # fi
