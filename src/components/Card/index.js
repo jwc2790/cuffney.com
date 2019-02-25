@@ -9,7 +9,7 @@ const Card = (props) => {
   } = props;
   return (
     <div className="card">
-      <img src={src} alt={slug} />
+      <img src={ src } alt={ slug } />
       <div>
         <h3>{ title }</h3>
       </div>

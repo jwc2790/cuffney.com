@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './index';
+import Home from '../index';
 
-describe('App', () => {
+describe('Home', () => {
   it('renders as expected', () => {
-    shallow(<App />);
+    shallow(<Home location={{ pathname: '/' }} />);
   });
 });

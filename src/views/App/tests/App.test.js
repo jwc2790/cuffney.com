@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Card from './index';
+import App from '../index';
 
-describe('Card', () => {
+describe('App', () => {
   it('renders as expected', () => {
-    shallow(<Card />);
+    shallow(<App />);
   });
 });
