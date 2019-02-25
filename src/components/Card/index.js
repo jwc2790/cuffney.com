@@ -26,7 +26,6 @@ Card.propTypes = {
 Card.defaultProps = {
   slug: '',
   src: '',
-  description: '',
   title: '',
 };
 
