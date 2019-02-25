@@ -6,8 +6,10 @@
     "start": "NODE_PATH=src react-scripts start",
     "build": "NODE_PATH=src react-scripts build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
+    "test:e2e": "./node_modules/.bin/nightwatch tests/*",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix src/**/*.js",
+    "lint": "NODE_PATH=src eslint src/**/*.js",
+    "lint:fix": "NODE_PATH=src eslint --fix src/**/*.js",
     "cover": "npm run test -- --coverage",
     "verify": "npm run lint && npm run cover"
   },
@@ -24,10 +26,12 @@
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "chromedriver": "^2.46.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
+    "nightwatch": "^1.0.19",
     "redux-mock-store": "^1.5.3"
   },
   "jest": {
