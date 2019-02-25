@@ -38,8 +38,9 @@ jobs:
 
       - run:
           name: validate cloudformation template
-          command: aws cloudformation validate-template \
-            --template-body file://template.yml
+          command: |
+            aws cloudformation validate-template \
+              --template-body file://template.yml
 
       - run:
           name: build
