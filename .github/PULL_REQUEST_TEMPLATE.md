@@ -9,6 +9,10 @@ assignees: 'jwc2790'
 
 # What Changes does this PR contain?
 
+## What `gif` best describes this PR?
+
+---
+
 - [ ] are npm packages up to date (`npm outdated`, `npm update`)
 - [ ] is everything well documented?
 - [ ] is everything well tested?
