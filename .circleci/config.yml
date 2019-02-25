@@ -52,6 +52,7 @@ jobs:
       - run:
           name: deploy infrastructure
           command: aws cloudformation update-stack \
+            --stack-name cuffney-com \
             --template-body file://template.yml
 
       - deploy:
