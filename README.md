@@ -14,8 +14,6 @@ The ansilary purpose of this project is to serve as a playground for staying on 
 
 ## Installation
 
-OS X & Linux:
-
 ```sh
 npm install
 ```
@@ -29,8 +27,10 @@ npm start
 
 ## Development process
 
-`master`: production environment
-`dev`: development environment
+#### Protected Branches
+
+- `master`: production environment
+- `dev`: development environment
 
 #### CI/CD
 
