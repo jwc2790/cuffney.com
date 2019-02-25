@@ -6,6 +6,9 @@ jobs:
 
     working_directory: ~/repo
 
+    environment:
+      CC_TEST_REPORTER_ID: 09d9641bc46aa146a53d8dc6a1b94b113ebef20db13cec2f4fd2aee04e0e5f24
+
     steps:
       - checkout
 
@@ -23,6 +26,13 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+            
       - run:
           name: Install PIP
           command: sudo apt-get install python-pip python-dev
@@ -52,7 +62,9 @@ jobs:
 
       - run:
           name: cover
-          command: npm run cover
+          command: |
+            npm run cover
+            ./cc-test-reporter after-build --exit-code $?
 
       # FIXME: this is currently failing
       # - run:
