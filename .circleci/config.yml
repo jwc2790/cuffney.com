@@ -1,12 +1,7 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/node:11.0
 
     working_directory: ~/repo
@@ -70,16 +65,21 @@ jobs:
               aws cloudformation update-stack \
                 --stack-name cuffney-com \
                 --template-body file://template.yml
+            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then
+            #   aws cloudformation update-stack \
+            #     --stack-name cuffney-com \
+            #     --template-body file://template.yml
             else
               echo "Not master branch, dry run only"
             fi
-
 
       - deploy:
           name: deploy
           command: |
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
               aws s3 sync ./build s3://cuffney.com --delete
+            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then
+            #   aws s3 sync ./build s3://dev.cuffney.com --delete
             else
               echo "Not master branch, dry run only"
             fi
@@ -91,7 +91,10 @@ jobs:
               aws cloudfront create-invalidation \
                 --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
                 --paths "/*"
+            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then 
+            #   aws cloudfront create-invalidation \
+            #     --distribution-id $DEV_CLOUDFRONT_DISTRIBUTION_ID \
+            #     --paths "/*"
             else
               echo "Not master branch, dry run only"
             fi
-
