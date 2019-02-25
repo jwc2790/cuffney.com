@@ -7,6 +7,11 @@ import styles from './Home.module.css';
 
 const Home = (props) => {
   const { location: { pathname } } = props;
+  const linkProps = {
+    className: styles.icon,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.flexWrapper}>
@@ -15,10 +20,10 @@ const Home = (props) => {
           <h1 className={styles.masthead}>Joe Cuffney.</h1>
           <h3 className={styles.subheader}>Sr. Software Engineer.</h3>
           <p className={styles.iconLinks}>
-            <a href="https://www.linkedin.com/in/cuffney/" className={styles.icon} target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/cuffney/" {...linkProps}>
               <FaLinkedin color="white" size="2em" />
             </a>
-            <a href="https://github.com/jwc2790" className={styles.icon} target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/jwc2790" {...linkProps}>
               <FaGithub color="white" size="2em" />
             </a>
           </p>
