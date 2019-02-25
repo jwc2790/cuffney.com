@@ -13,13 +13,13 @@ import styles from './Work.module.css';
 const Work = (props) => {
   const { location: { pathname } } = props;
   return (
-    <div className={styles.wrapper}>
+    <div className={ styles.wrapper }>
       <h1>Work.</h1>
-      <Nav active={pathname} />
-      <div className={styles.grid}>
+      <Nav active={ pathname } />
+      <div className={ styles.grid }>
         { projects.map(project => (
-          <Link to={`/work/${project.slug}`} key={project.slug}>
-            <Card {...project} />
+          <Link to={ `/work/${ project.slug }` } key={ project.slug }>
+            <Card { ...project } />
           </Link>
         )) }
       </div>

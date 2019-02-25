@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Nav from './index';
+import Card from '../index';
 
-describe('Nav', () => {
+describe('Card', () => {
   it('renders as expected', () => {
-    shallow(<Nav active="/" />);
+    shallow(<Card />);
   });
 });

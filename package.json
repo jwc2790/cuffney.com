@@ -7,7 +7,7 @@
     "build": "NODE_PATH=src react-scripts build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
     "test:e2e": "./node_modules/.bin/nightwatch tests/*",
-    "lint": "eslint src/**/*.js",
+    "lint": "NODE_PATH=src eslint src/**/*.js",
     "cover": "npm run test -- --coverage"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
     "chromedriver": "^2.46.0",
+    "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
@@ -48,29 +49,6 @@
       "!src/index.js"
     ]
   },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "env": {
-      "browser": true,
-      "node": true,
-      "jest": true
-    },
-    "rules": {
-      "import/no-unresolved": false,
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "src/registerServiceWorker.js"
-  ],
   "browserslist": [
     ">0.2%",
     "not dead",

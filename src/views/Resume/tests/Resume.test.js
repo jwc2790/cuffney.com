@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Resume from './index';
+import Resume from '../index';
 
 describe('Resume', () => {
   it('renders as expected', () => {

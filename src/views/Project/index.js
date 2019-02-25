@@ -15,7 +15,7 @@ const Project = (props) => {
     title,
   } = project;
   return (
-    <div className={styles.wrapper}>
+    <div className={ styles.wrapper }>
       <h1>
         <FaArrowLeft color="white" size="2rem" />
         { title }
