@@ -58,6 +58,10 @@ jobs:
       - run:
           name: cover
           command: npm run cover
+
+      - run:
+          name: end to end testing
+          command: npm run test:e2e
       
       - run:
           name: deploy infrastructure
