@@ -48,8 +48,16 @@ jobs:
           command: npm run build
 
       - run:
+          name: lint
+          command: npm run lint
+
+      - run:
           name: test
           command: yarn test
+
+      - run:
+          name: cover
+          command: npm run cover
       
       - run:
           name: deploy infrastructure
