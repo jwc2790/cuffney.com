@@ -53,10 +53,11 @@ jobs:
       
       - run:
           name: deploy infrastructure
-          command: aws cloudformation update-stack \
-            --stack-name cuffney-com \
-            --template-body file://template.yml
-            --region us-east-1
+          command: |
+            aws cloudformation update-stack \
+              --stack-name cuffney-com \
+              --template-body file://template.yml
+              --region us-east-1
 
       - deploy:
           name: deploy
