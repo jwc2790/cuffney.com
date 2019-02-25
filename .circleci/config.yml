@@ -9,11 +9,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:11.0
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
     working_directory: ~/repo
 
     steps:
@@ -33,5 +28,58 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn test
+      - run:
+          name: Install PIP
+          command: sudo apt-get install python-pip python-dev
+
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - run:
+          name: validate cloudformation template
+          command: |
+            aws cloudformation validate-template \
+              --template-body file://template.yml \
+              --region us-east-1
+
+      - run:
+          name: build
+          command: npm run build
+
+      - run:
+          name: test
+          command: yarn test
+      
+      - run:
+          name: deploy infrastructure
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+              aws cloudformation update-stack \
+                --stack-name cuffney-com \
+                --template-body file://template.yml
+            else
+              echo "Not master branch, dry run only"
+            fi
+
+
+      - deploy:
+          name: deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+              aws s3 sync ./build s3://cuffney.com --delete
+            else
+              echo "Not master branch, dry run only"
+            fi
+
+      - deploy:
+          name: Create CloudFront Invalidation
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+              aws cloudfront create-invalidation \
+                --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+                --paths "/*"
+            else
+              echo "Not master branch, dry run only"
+            fi
+

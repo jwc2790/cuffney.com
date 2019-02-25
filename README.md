@@ -1,6 +1,8 @@
-# v2.cuffney.com
+# cuffney.com
 
 > Joe Cuffney's portfiolio site.
+
+[![CircleCI](https://circleci.com/gh/jwc2790/cuffney.com.svg?style=svg)](https://circleci.com/gh/jwc2790/cuffney.com)
 
 ### Requirements
 
