@@ -54,13 +54,13 @@ jobs:
       - run:
           name: deploy infrastructure
           command: |
-            # if [ "${CIRCLE_BRANCH}" = "master" ]; then
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
               aws cloudformation update-stack \
                 --stack-name cuffney-com \
                 --template-body file://template.yml
-            # else
-            #   echo "Not master branch, dry run only"
-            # fi
+            else
+              echo "Not master branch, dry run only"
+            fi
 
 
       - deploy:
