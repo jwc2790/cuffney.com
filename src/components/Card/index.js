@@ -20,7 +20,6 @@ const Card = (props) => {
 Card.propTypes = {
   slug: propTypes.string,
   src: propTypes.string,
-  description: propTypes.string,
   title: propTypes.string,
 };
 
