@@ -5,13 +5,15 @@ import Nav from 'components/Nav';
 
 import styles from './Home.module.css';
 
+const linkProps = {
+  className: styles.icon,
+  target: '_blank',
+  rel: 'noopener noreferrer',
+};
+
 const Home = (props) => {
   const { location: { pathname } } = props;
-  const linkProps = {
-    className: styles.icon,
-    target: '_blank',
-    rel: 'noopener noreferrer',
-  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.flexWrapper}>
