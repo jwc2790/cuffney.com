@@ -1,14 +1,12 @@
+defaults: &defaults
+  docker: 
+    - image: circleci/node:11.0
+  working_directory: ~/repo
+
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node:11.0-browsers
-
-    working_directory: ~/repo
-
-    environment:
-      CC_TEST_REPORTER_ID: 09d9641bc46aa146a53d8dc6a1b94b113ebef20db13cec2f4fd2aee04e0e5f24
-
+  dependencies:
+    <<: *defaults
     steps:
       - checkout
 
@@ -26,88 +24,38 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-            ./cc-test-reporter before-build
-            
-      - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
+  build: 
+    <<: *defaults
+    steps:
+      - checkout
+      - run: npm run build
+ 
 
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
-
-      - run:
-          name: validate cloudformation template
-          command: |
-            aws cloudformation validate-template \
-              --template-body file://template.yml \
-              --region us-east-1
-
-      - run:
-          name: build
-          command: npm run build
-
-      - run:
-          name: lint
-          command: npm run lint
-
-      - run:
-          name: test
-          command: yarn test
-
-      - run:
-          name: cover
-          command: |
-            npm run cover
-            ./cc-test-reporter after-build --exit-code $?
-
-      # FIXME: this is currently failing
-      # - run:
-      #     name: end to end testing
-      #     command: npm run test:e2e
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - dependencies
+      - build:
+          requires:
+            - dependencies
+      # - lint:
+      #     requires:
+      #       - dependencies
+      # - coverage:
+      #     requires:
+      #       - dependencies
+      # - e2e_tests:
+      #     requires: 
+      #       - dependencies
+      # - test_deploy:
+      #     requires: 
+      #       - dependencies
+      #     filters:
+      #       only: dev
+      # - prod_deploy:
+      #     requires: 
+      #       - dependencies
+      #     filters:
+      #       only: master
       
-      - run:
-          name: deploy infrastructure
-          command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              aws cloudformation update-stack \
-                --stack-name cuffney-com \
-                --template-body file://template.yml
-            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then
-            #   aws cloudformation update-stack \
-            #     --stack-name cuffney-com \
-            #     --template-body file://template.yml
-            else
-              echo "Not master branch, dry run only"
-            fi
-
-      - deploy:
-          name: deploy
-          command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              aws s3 sync ./build s3://cuffney.com --delete
-            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then
-            #   aws s3 sync ./build s3://dev.cuffney.com --delete
-            else
-              echo "Not master branch, dry run only"
-            fi
-
-      - deploy:
-          name: Create CloudFront Invalidation
-          command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              aws cloudfront create-invalidation \
-                --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
-                --paths "/*"
-            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then 
-            #   aws cloudfront create-invalidation \
-            #     --distribution-id $DEV_CLOUDFRONT_DISTRIBUTION_ID \
-            #     --paths "/*"
-            else
-              echo "Not master branch, dry run only"
-            fi
