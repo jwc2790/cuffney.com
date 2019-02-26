@@ -95,16 +95,16 @@ jobs:
       - checkout
 
       - run:
-        name: Install PIP
-        command: sudo apt-get install python-pip python-dev
+          name: Install PIP
+          command: sudo apt-get install python-pip python-dev
 
       - run:
           name: Install awscli
           command: sudo pip install awscli
 
       - run:
-        name: deploy infrastructure
-        command: |
+          name: deploy infrastructure
+          command: |
             aws cloudformation update-stack \
               --stack-name cuffney-com \
               --template-body file://template.yml
@@ -112,31 +112,31 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-        - checkout
+      - checkout
 
-        - restore_cache:
-            keys:
-              - v1-dependencies-{{ checksum "package.json" }
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }
 
-        - run:
+      - run:
           name: Install PIP
           command: sudo apt-get install python-pip python-dev
 
-        - run:
-            name: Install awscli
-            command: sudo pip install awscli
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
 
-        - deploy:
-            name: sync build to s3
-            command: |
-              aws s3 sync ./build s3://cuffney.com --delete
+      - deploy:
+          name: sync build to s3
+          command: |
+            aws s3 sync ./build s3://cuffney.com --delete
 
-        - deploy:
-            name: Create CloudFront Invalidation
-            command: |
-              aws cloudfront create-invalidation \
-                --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
-                --paths "/*"
+      - deploy:
+          name: Create CloudFront Invalidation
+          command: |
+            aws cloudfront create-invalidation \
+              --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+              --paths "/*"
 
 
 workflows:
