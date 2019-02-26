@@ -42,7 +42,73 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run lint 
+      - run: npm run lint
+
+  test: 
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run test
+
+  coverage: 
+    <<: *defaults
+    environment:
+      CC_TEST_REPORTER_ID: 09d9641bc46aa146a53d8dc6a1b94b113ebef20db13cec2f4fd2aee04e0e5f24
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+      - run: npm run cover 
+
+  validate_cloudformation: 
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install PIP
+          command: sudo apt-get install python-pip python-dev
+
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+
+      - run:
+          name: validate cloudformation template
+          command: |
+            aws cloudformation validate-template \
+              --template-body file://template.yml \
+              --region us-east-1
+
+  deploy_infrastructure:
+    <<: *defaults
+    steps:
+        - checkout
+
+        - run:
+          name: Install PIP
+          command: sudo apt-get install python-pip python-dev
+
+        - run:
+            name: Install awscli
+            command: sudo pip install awscli
+
+        - run:
+          name: deploy infrastructure
+          command: |
+              aws cloudformation update-stack \
+                --stack-name cuffney-com \
+                --template-body file://template.yml
+
 
 workflows:
   version: 2
@@ -55,15 +121,24 @@ workflows:
       - lint:
           requires:
             - dependencies
-      # - coverage:
+      - test:
+          requires:
+            - dependencies
+      - coverage:
+          requires:
+            - dependencies
+      - validate_cloudformation
+      - deploy_infrastructure:
+          requires: 
+            - dependencies
+            - build
+            - lint
+            - test
+            - cover
+            - validate_cloudformation
+          filters:
+            only: master
+      # - deploy:
       #     requires:
-      #       - dependencies
-      # - e2e_tests:
-      #     requires: 
-      #       - dependencies
-      # - prod_deploy:
-      #     requires: 
-      #       - dependencies
-      #     filters:
-      #       only: master
+      #       - deploy_infrastructure
       
