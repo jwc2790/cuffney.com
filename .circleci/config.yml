@@ -1,14 +1,14 @@
 version: 2
+
+defaults: &defaults
+  docker: 
+    - image: circleci/node:11.0
+  working_directory: ~/repo
+
 jobs:
-  build:
-    docker:
-      - image: circleci/node:11.0-browsers
 
-    working_directory: ~/repo
-
-    environment:
-      CC_TEST_REPORTER_ID: 09d9641bc46aa146a53d8dc6a1b94b113ebef20db13cec2f4fd2aee04e0e5f24
-
+  dependencies:
+    <<: *defaults
     steps:
       - checkout
 
@@ -26,13 +26,58 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+  build: 
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run build
+      - save_cache:
+          paths:
+            - build
+          key: v1-build-{{ checksum "package.json" }}
+
+  lint: 
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run lint
+
+  test: 
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run test
+
+  coverage: 
+    <<: *defaults
+    environment:
+      CC_TEST_REPORTER_ID: 09d9641bc46aa146a53d8dc6a1b94b113ebef20db13cec2f4fd2aee04e0e5f24
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Setup Code Climate test-reporter
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
             ./cc-test-reporter before-build
-            
+      - run: npm run cover 
+
+  validate_cloudformation: 
+    <<: *defaults
+    steps:
+      - checkout
       - run:
           name: Install PIP
           command: sudo apt-get install python-pip python-dev
@@ -48,66 +93,89 @@ jobs:
               --template-body file://template.yml \
               --region us-east-1
 
-      - run:
-          name: build
-          command: npm run build
+  deploy_infrastructure:
+    <<: *defaults
+    steps:
+      - checkout
 
       - run:
-          name: lint
-          command: npm run lint
+          name: Install PIP
+          command: sudo apt-get install python-pip python-dev
 
       - run:
-          name: test
-          command: yarn test
+          name: Install awscli
+          command: sudo pip install awscli
 
-      - run:
-          name: cover
-          command: |
-            npm run cover
-            ./cc-test-reporter after-build --exit-code $?
-
-      # FIXME: this is currently failing
-      # - run:
-      #     name: end to end testing
-      #     command: npm run test:e2e
-      
       - run:
           name: deploy infrastructure
           command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              aws cloudformation update-stack \
-                --stack-name cuffney-com \
-                --template-body file://template.yml
-            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then
-            #   aws cloudformation update-stack \
-            #     --stack-name cuffney-com \
-            #     --template-body file://template.yml
-            else
-              echo "Not master branch, dry run only"
-            fi
+            aws cloudformation update-stack \
+              --stack-name cuffney-com \
+              --template-body file://template.yml
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-build-{{ checksum "package.json" }}
+
+      - run:
+          name: Install PIP
+          command: sudo apt-get install python-pip python-dev
+
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
 
       - deploy:
-          name: deploy
+          name: sync build to s3
           command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              aws s3 sync ./build s3://cuffney.com --delete
-            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then
-            #   aws s3 sync ./build s3://dev.cuffney.com --delete
-            else
-              echo "Not master branch, dry run only"
-            fi
+            aws s3 sync ./build s3://cuffney.com --delete
 
       - deploy:
           name: Create CloudFront Invalidation
           command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              aws cloudfront create-invalidation \
-                --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
-                --paths "/*"
-            # elif [ "${CIRCLE_BRANCH}" = "dev" ]; then 
-            #   aws cloudfront create-invalidation \
-            #     --distribution-id $DEV_CLOUDFRONT_DISTRIBUTION_ID \
-            #     --paths "/*"
-            else
-              echo "Not master branch, dry run only"
-            fi
+            aws cloudfront create-invalidation \
+              --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+              --paths "/*"
+
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - dependencies
+      - build:
+          requires:
+            - dependencies
+      - lint:
+          requires:
+            - dependencies
+      - test:
+          requires:
+            - dependencies
+      - coverage:
+          requires:
+            - dependencies
+      - validate_cloudformation
+      - deploy_infrastructure:
+          requires: 
+            - dependencies
+            - build
+            - lint
+            - test
+            - coverage
+            - validate_cloudformation
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - deploy_infrastructure
+          filters:
+            branches:
+              only: master
+      
