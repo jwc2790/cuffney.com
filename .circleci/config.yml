@@ -29,11 +29,13 @@ jobs:
   build: 
     <<: *defaults
     steps:
+      - checkout
       - run: npm run build
 
   lint: 
     <<: *defaults
     steps:
+      - checkout
       - run: npm run lint 
 
 workflows:
