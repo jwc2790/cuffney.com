@@ -138,7 +138,7 @@ workflows:
             - validate_cloudformation
           filters:
             branches:
-            only: master
+              only: master
       # - deploy:
       #     requires:
       #       - deploy_infrastructure
