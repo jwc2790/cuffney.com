@@ -134,7 +134,7 @@ workflows:
             - build
             - lint
             - test
-            - cover
+            - coverage
             - validate_cloudformation
           filters:
             branches:
