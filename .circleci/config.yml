@@ -120,7 +120,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-build-{{ checksum "package.json" }
+            - v1-build-{{ checksum "package.json" }}
 
       - run:
           name: Install PIP
