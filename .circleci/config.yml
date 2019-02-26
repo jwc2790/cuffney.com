@@ -173,5 +173,5 @@ workflows:
             - deploy_infrastructure
           filters:
             branches:
-              only: ${CIRCLE_BRANCH}
+              only: master
       
