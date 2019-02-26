@@ -92,22 +92,22 @@ jobs:
   deploy_infrastructure:
     <<: *defaults
     steps:
-        - checkout
+      - checkout
 
-        - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
+      - run:
+        name: Install PIP
+        command: sudo apt-get install python-pip python-dev
 
-        - run:
-            name: Install awscli
-            command: sudo pip install awscli
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
 
-        - run:
-          name: deploy infrastructure
-          command: |
-              aws cloudformation update-stack \
-                --stack-name cuffney-com \
-                --template-body file://template.yml
+      - run:
+        name: deploy infrastructure
+        command: |
+            aws cloudformation update-stack \
+              --stack-name cuffney-com \
+              --template-body file://template.yml
 
   deploy:
     <<: *defaults
@@ -165,10 +165,13 @@ workflows:
             - test
             - coverage
             - validate_cloudformation
-          # filters:
-          #   branches:
-          #     only: master
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
             - deploy_infrastructure
+          filters:
+            branches:
+              only: ${CIRCLE_BRANCH}
       
