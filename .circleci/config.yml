@@ -34,6 +34,10 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
       - run: npm run build
+      - save_cache:
+          paths:
+            - build
+          key: v1-build-{{ checksum "package.json" }}
 
   lint: 
     <<: *defaults
@@ -116,7 +120,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }
+            - v1-build-{{ checksum "package.json" }
 
       - run:
           name: Install PIP
