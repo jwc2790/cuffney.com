@@ -1,5 +1,7 @@
 # cuffney.com
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jwc2790/cuffney.com.svg)](https://greenkeeper.io/)
+
 > personal website and playground for project configuration, operations, and best practices.
 
 [![CircleCI][circle-ci-badge]][circle-ci-url]
