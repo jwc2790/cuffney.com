@@ -57,16 +57,16 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
       - run: npm run test
 
-  e2e_tests: 
-    docker: 
-      - image: circleci/node:11.0-browsers
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run lint
+  # e2e_tests: 
+  #   docker: 
+  #     - image: circleci/node:11.0-browsers
+  #   working_directory: ~/repo
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys:
+  #           - v1-dependencies-{{ checksum "package.json" }}
+  #     - run: npm run lint
 
   coverage: 
     <<: *defaults
@@ -168,9 +168,9 @@ workflows:
       - tests:
           requires:
             - dependencies
-      - e2e_tests:
-          requires:
-            - dependencies
+      # - e2e_tests:
+      #     requires:
+      #       - dependencies
       - coverage:
           requires:
             - dependencies
@@ -183,6 +183,7 @@ workflows:
             - tests
             - coverage
             - validate_cloudformation
+            # - e2e_tests
           filters:
             branches:
               only: master
