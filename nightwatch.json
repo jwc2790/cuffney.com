@@ -1,7 +1,7 @@
 {
     "src_folders" : ["tests"],
   
-    "webdriver" : {
+    "selenium" : {
       "start_process": true,
       "server_path": "node_modules/.bin/chromedriver",
       "port": 9515
@@ -9,6 +9,14 @@
   
     "test_settings" : {
       "default" : {
+        "launch_url" : "https://simplewebrtc.com/demo.html",
+        "silent" : true,
+        "screenshots" : {
+          "enabled" : false,
+          "path" : "./screenshots"
+        }
+      },
+      "local" : {
         "desiredCapabilities": {
           "browserName": "chrome"
         }

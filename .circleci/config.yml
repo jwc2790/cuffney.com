@@ -180,7 +180,7 @@ workflows:
             - dependencies
             - build
             - lint
-            - test
+            - tests
             - coverage
             - validate_cloudformation
           filters:
