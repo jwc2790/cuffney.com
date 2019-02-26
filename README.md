@@ -1,10 +1,10 @@
 # cuffney.com
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/jwc2790/cuffney.com.svg)](https://greenkeeper.io/)
 
 > personal website and playground for project configuration, operations, and best practices.
 
 [![CircleCI][circle-ci-badge]][circle-ci-url]
+[![Greenkeeper][greenkeeper-badge]][greenkeeper-url]
 [![Maintainability][code-climate-maintainability-badge]][code-climate-maintainability-url]
 [![Test Coverage][code-climate-test-coverage-badge]][code-climate-test-coverage-url]
 
@@ -47,3 +47,5 @@ npm start
 [code-climate-maintainability-url]: https://codeclimate.com/github/jwc2790/cuffney.com/maintainability
 [code-climate-test-coverage-badge]: https://api.codeclimate.com/v1/badges/38e97723b5dda025cc10/test_coverage
 [code-climate-test-coverage-url]: https://codeclimate.com/github/jwc2790/cuffney.com/test_coverage
+[greenkeeper-badge]: https://badges.greenkeeper.io/jwc2790/cuffney.com.svg
+[greenkeeper-url]: https://greenkeeper.io/
