@@ -30,12 +30,18 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
       - run: npm run build
 
   lint: 
     <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
       - run: npm run lint 
 
 workflows:
