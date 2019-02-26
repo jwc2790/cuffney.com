@@ -113,6 +113,7 @@ jobs:
     <<: *defaults
     steps:
         - checkout
+
         - restore_cache:
             keys:
               - v1-dependencies-{{ checksum "package.json" }
@@ -125,17 +126,17 @@ jobs:
             name: Install awscli
             command: sudo pip install awscli
 
-      - deploy:
-          name: sync build to s3
-          command: |
-            aws s3 sync ./build s3://cuffney.com --delete
+        - deploy:
+            name: sync build to s3
+            command: |
+              aws s3 sync ./build s3://cuffney.com --delete
 
-      - deploy:
-          name: Create CloudFront Invalidation
-          command: |
-            aws cloudfront create-invalidation \
-              --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
-              --paths "/*"
+        - deploy:
+            name: Create CloudFront Invalidation
+            command: |
+              aws cloudfront create-invalidation \
+                --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
+                --paths "/*"
 
 
 workflows:
@@ -167,7 +168,7 @@ workflows:
           filters:
             branches:
               only: master
-      # - deploy:
-      #     requires:
-      #       - deploy_infrastructure
+      - deploy:
+          requires:
+            - deploy_infrastructure
       
