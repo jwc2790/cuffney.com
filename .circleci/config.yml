@@ -1,10 +1,12 @@
+version: 2
+
 defaults: &defaults
   docker: 
     - image: circleci/node:11.0
   working_directory: ~/repo
 
-version: 2
 jobs:
+
   dependencies:
     <<: *defaults
     steps:
@@ -27,12 +29,11 @@ jobs:
   build: 
     <<: *defaults
     steps:
-      - checkout
       - run: npm run build
+
   lint: 
     <<: *defaults
     steps:
-      - checkout
       - run: npm run lint 
 
 workflows:
@@ -52,11 +53,6 @@ workflows:
       # - e2e_tests:
       #     requires: 
       #       - dependencies
-      # - test_deploy:
-      #     requires: 
-      #       - dependencies
-      #     filters:
-      #       only: dev
       # - prod_deploy:
       #     requires: 
       #       - dependencies
