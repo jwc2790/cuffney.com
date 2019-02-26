@@ -36,9 +36,9 @@ workflows:
   build_test_deploy:
     jobs:
       - dependencies
-      # - build:
-      #     requires:
-      #       - dependencies
+      - build:
+          requires:
+            - dependencies
       # - lint:
       #     requires:
       #       - dependencies
