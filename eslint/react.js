@@ -12,7 +12,7 @@ module.exports = {
   env: {
     browser: true,
     'shared-node-browser': true,
-    node: false,
+    node: true,
   },
   parserOptions: {
     sourceType: 'module',
