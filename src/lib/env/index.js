@@ -8,13 +8,5 @@ const ANALYTICS_PROD = 'UA-45447105-1';
 
 export const isTest = () => NODE_ENV === TEST_ENV;
 
-export const getAnalyticsId = () => {
-    switch(NODE_ENV) {
-        case PROD_ENV:
-            return ANALYTICS_PROD;
-        case TEST_ENV:
-            return ANALYTICS_DEV;
-        default:
-            return ANALYTICS_DEV;
-    }
-}
+export const getAnalyticsId = () => NODE_ENV === PROD_ENV ?
+    ANALYTICS_PROD: ANALYTICS_DEV;
