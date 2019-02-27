@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import GoogleAnalytics from "react-ga";
 
-const { NODE_ENV } = process.env;
-const TEST_ENV = 'test';
-const isTest = () => NODE_ENV === TEST_ENV;
+import { isTest, getAnalyticsId } from 'lib/env';
 
-GoogleAnalytics.initialize("UA-0000000-0", { testMode: isTest() });
+
+GoogleAnalytics.initialize(getAnalyticsId(), { testMode: isTest() });
 
 const withTracker = (WrappedComponent, options = {}) => {
     const trackPage = page => {
@@ -20,7 +19,7 @@ const withTracker = (WrappedComponent, options = {}) => {
     class HOC extends Component {
 
         static propTypes = {
-            location: PropTypes.objectOf({
+            location: PropTypes.shape({
                 pathname: PropTypes.string,
                 search: PropTypes.string,
             }),
