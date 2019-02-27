@@ -9,7 +9,7 @@ describe('NotFound', () => {
   beforeEach(() => {
     props = {
       location: {
-        pathname: '',
+        pathname: '/literally-anything-that-isnt-valid',
       }
     }
   })
