@@ -6,7 +6,6 @@
     "start": "NODE_PATH=src react-scripts start",
     "build": "NODE_PATH=src react-scripts build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
-    "test:e2e": "./node_modules/.bin/nightwatch tests/*",
     "lint": "NODE_PATH=src eslint src/**/*.js",
     "cover": "npm run test -- --coverage"
   },
@@ -16,6 +15,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-ga": "^2.5.7",
     "react-icons": "^3.4.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
@@ -23,13 +23,13 @@
   },
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "chromedriver": "^2.46.0",
+    "chai": "^4.2.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "nightwatch": "^1.0.19",
-    "redux-mock-store": "^1.5.3"
+    "redux-mock-store": "^1.5.3",
+    "sinon": "^7.2.5"
   },
   "jest": {
     "coverageThreshold": {
