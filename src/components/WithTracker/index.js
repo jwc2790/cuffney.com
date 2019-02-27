@@ -1,8 +1,12 @@
-import React, { Component, } from "react";
+import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import GoogleAnalytics from "react-ga";
 
-GoogleAnalytics.initialize("UA-0000000-0");
+const { NODE_ENV } = process.env;
+const TEST_ENV = 'test';
+const isTest = () => NODE_ENV === TEST_ENV;
+
+GoogleAnalytics.initialize("UA-0000000-0", { testMode: isTest() });
 
 const withTracker = (WrappedComponent, options = {}) => {
     const trackPage = page => {
@@ -13,18 +17,22 @@ const withTracker = (WrappedComponent, options = {}) => {
         GoogleAnalytics.pageview(page);
     };
 
-    const HOC = class extends Component {
+    class HOC extends Component {
 
         static propTypes = {
-            location: PropTypes.shape({
+            location: PropTypes.objectOf({
                 pathname: PropTypes.string,
                 search: PropTypes.string,
-            }), 
+            }),
         }
 
         componentDidMount() {
             const { location: { pathname, search } } = this.props;
             trackPage(`${pathname}-${search}`);
+        }
+
+        shouldComponentUpdate() {
+            return true;
         }
 
         componentDidUpdate(prevProps) {
@@ -40,7 +48,7 @@ const withTracker = (WrappedComponent, options = {}) => {
         render() {
             return <WrappedComponent { ...this.props } />;
         }
-    };
+    }
 
     return HOC;
 };
