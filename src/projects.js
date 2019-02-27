@@ -1,4 +1,4 @@
-const projects = [
+export const projects = [
   {
     slug: 'tandem',
     src: '/imgs/work/tandem.png',
@@ -49,5 +49,3 @@ const projects = [
   //   to: 'http://www.teamwass.com/',
   // },
 ];
-
-module.exports = { projects };
