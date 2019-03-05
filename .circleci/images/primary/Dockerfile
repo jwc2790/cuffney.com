@@ -47,4 +47,7 @@ RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.
 
 # TODO: Add Terraform to Image Terraform
 # TODO: Add Selenium Software to Image
-# TODO: Add aws cli to image
+
+USER circleci
+
+CMD ["/bin/sh"]
