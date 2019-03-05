@@ -90,13 +90,13 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
+      # - run:
+      #     name: Install PIP
+      #     command: sudo apt-get install python-pip python-dev
 
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
+      # - run:
+      #     name: Install awscli
+      #     command: sudo pip install awscli
 
       - run:
           name: validate cloudformation template
