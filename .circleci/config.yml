@@ -86,6 +86,16 @@ jobs:
               --template-body file://template.yml \
               --region us-east-1
 
+  validate_terraform: 
+    <<: *defaults
+    steps:
+      - checkout
+
+      - run:
+          name: validate terraform
+          command: |
+            terraform --version
+
   deploy_infrastructure:
     <<: *defaults
     steps:
@@ -150,13 +160,11 @@ workflows:
       - tests:
           requires:
             - dependencies
-      # - e2e_tests:
-      #     requires:
-      #       - dependencies
       - coverage:
           requires:
             - dependencies
       - validate_cloudformation
+      - validate_terraform
       - deploy_infrastructure:
           requires: 
             - dependencies
@@ -165,7 +173,6 @@ workflows:
             - tests
             - coverage
             - validate_cloudformation
-            # - e2e_tests
           filters:
             branches:
               only: master

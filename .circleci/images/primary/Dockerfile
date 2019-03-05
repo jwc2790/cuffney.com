@@ -1,5 +1,6 @@
 ARG UBUNTU_VERSION=latest
 ARG NODE_VERSION=latest
+ARG TERRAFORM_VERSION=0.11.11
 
 FROM ubuntu:${UBUNTU_VERSION}
 
@@ -45,13 +46,18 @@ RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.
   sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
   rm -R awscli-bundle.zip ./awscli-bundle;
 
+# Add Terraform to Image Terraform
+RUN wget "https://releases.hashicorp.com/terraform/0.11.11/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
+  unzip "terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
+  sudo install terraform /usr/local/bin/ \
+  terraform --version
+
 # circleci user
 RUN groupadd --gid 3434 circleci \
   && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci \
   && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
   && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' >> /etc/sudoers.d/env_keep
 
-# TODO: Add Terraform to Image Terraform
 # TODO: Add Selenium Software to Image
 
 USER circleci
