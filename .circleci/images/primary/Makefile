@@ -16,3 +16,10 @@ build::
 
 push::
 	docker push $(REPO_URI)
+
+run::
+	docker run \
+		-ti \
+		--rm \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		$(REPO_URI);
