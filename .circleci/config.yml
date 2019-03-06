@@ -82,7 +82,6 @@ jobs:
       - run:
           name: validate terraform
           command: |
-            terraform init -input=false infrastructure/
             terraform validate infrastructure/
 
   deploy_infrastructure:
