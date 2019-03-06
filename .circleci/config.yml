@@ -82,7 +82,7 @@ jobs:
       - run:
           name: validate terraform
           command: |
-            terraform init infrastructure/
+            terraform init -input=false infrastructure/
             terraform validate infrastructure/
 
   deploy_infrastructure:
@@ -93,8 +93,8 @@ jobs:
       - run:
           name: deploy infrastructure
           command: |
-            terraform init infrastructure/
-            terraform apply infrastructure/
+            terraform init -input=false infrastructure/
+            terraform apply -input=false -auto-approve infrastructure/ 
 
   deploy:
     <<: *defaults
