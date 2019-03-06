@@ -94,7 +94,8 @@ jobs:
       - run:
           name: validate terraform
           command: |
-            terraform --version
+            terraform init infrastructure/
+            terraform validate infrastructure/
 
   deploy_infrastructure:
     <<: *defaults
