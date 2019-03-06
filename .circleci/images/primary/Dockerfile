@@ -49,9 +49,9 @@ RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.
   rm -R awscli-bundle.zip ./awscli-bundle;
 
 # Add Terraform to Image Terraform
-RUN curl https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip -o 'terraform.zip' \
-  unzip terraform.zip \
-  sudo install terraform /usr/local/bin/ \
+RUN curl https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip -o 'terraform.zip' && \
+  unzip terraform.zip && \
+  sudo install terraform /usr/local/bin/ && \
   terraform --version
 
 # circleci user
