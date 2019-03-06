@@ -103,14 +103,6 @@ jobs:
       - checkout
 
       - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
-
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
-
-      - run:
           name: deploy infrastructure
           command: |
             aws cloudformation update-stack \
@@ -125,14 +117,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-build-{{ checksum "package.json" }}
-
-      - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
-
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
 
       - deploy:
           name: sync build to s3
