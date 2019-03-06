@@ -8,6 +8,11 @@ variable "www_redirect" {
   default = true
 }
 
+variable "target_zone_id" {
+  type    = "string"
+  default = "Z17UESAG3QE29Y"
+}
+
 variable "acm_certificate_arn" {
   type    = "string"
   default = "arn:aws:acm:us-east-1:255964265911:certificate/3a6c2c22-cb43-4c9b-9462-cf261b498eea"
