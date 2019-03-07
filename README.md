@@ -39,6 +39,11 @@ npm start
 - The CI pipeline runs on code climate and runs on every commit and is required to be passing in order for PR's to be merged.
 - As apart of the CI build, data is sent to code climate to analyze and review the code for maintainability and test coverage
 
+###### Testing CircleCI Locally
+
+1. make sure `circleci` is installed `brew install circleci`
+2. run `circleci local execute --job <job_name>` (workflows not supported)
+
 <!-- Markdown link & img dfn's -->
 [site-screenshot]: public/imgs/home-screenshot.png
 [circle-ci-badge]: https://circleci.com/gh/jwc2790/cuffney.com.svg?style=svg
