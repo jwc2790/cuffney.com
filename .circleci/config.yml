@@ -72,19 +72,7 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
             ./cc-test-reporter before-build
-      - run: npm run cover 
-
-  validate_cloudformation: 
-    <<: *defaults
-    steps:
-      - checkout
-
-      - run:
-          name: validate cloudformation template
-          command: |
-            aws cloudformation validate-template \
-              --template-body file://template.yml \
-              --region us-east-1
+      - run: npm run cover
 
   validate_terraform: 
     <<: *defaults
@@ -94,7 +82,7 @@ jobs:
       - run:
           name: validate terraform
           command: |
-            terraform init infrastructure/
+            terraform init -input=false infrastructure/ 
             terraform validate infrastructure/
 
   deploy_infrastructure:
@@ -105,9 +93,8 @@ jobs:
       - run:
           name: deploy infrastructure
           command: |
-            aws cloudformation update-stack \
-              --stack-name cuffney-com \
-              --template-body file://template.yml
+            terraform init -input=false infrastructure/
+            terraform apply -input=false -auto-approve infrastructure/ 
 
   deploy:
     <<: *defaults
@@ -130,7 +117,6 @@ jobs:
               --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
               --paths "/*"
 
-
 workflows:
   version: 2
   build_test_deploy:
@@ -148,7 +134,6 @@ workflows:
       - coverage:
           requires:
             - dependencies
-      - validate_cloudformation
       - validate_terraform
       - deploy_infrastructure:
           requires: 
@@ -157,7 +142,6 @@ workflows:
             - lint
             - tests
             - coverage
-            - validate_cloudformation
           filters:
             branches:
               only: master
@@ -167,4 +151,3 @@ workflows:
           filters:
             branches:
               only: master
-      
