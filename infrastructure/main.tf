@@ -40,18 +40,19 @@ resource "aws_cloudfront_origin_access_identity" "default" {
 ## ############################################################################
 
 # TODO: create record pointing to CloudFront Distrobution
-# resource "aws_route53_record" "a_record" {
-#   zone_id     = "${var.target_zone_id}"
-#   name        = "www"
-#   type        = "A"
-#   depends_on  = ["aws_s3_bucket.origin"]
+resource "aws_route53_record" "a_record" {
+  zone_id     = "${var.target_zone_id}"
+  name        = ""
+  type        = "A"
+  depends_on  = ["aws_cloudfront_distribution.default"]
 
-#   alias {
-#     name                   = "${aws_cloudfront_distribution.default.domain_name}"
-#     evaluate_target_health = "true"
-#     zone_id                = "${aws_cloudfront_distribution.default.hosted_zone_id }"
-#   }
-# }
+  alias {
+    name                   = "${aws_cloudfront_distribution.default.domain_name}"
+    evaluate_target_health = "true"
+    zone_id                = "${aws_cloudfront_distribution.default.hosted_zone_id }"
+  }
+}
+
 resource "aws_route53_record" "www_record" {
   zone_id     = "${var.target_zone_id}"
   name        = "www"
@@ -69,54 +70,54 @@ resource "aws_route53_record" "www_record" {
 ## CloudFront Distrobution
 ## ############################################################################
 
-# resource "aws_cloudfront_distribution" "default" {
-#   enabled             = "true"
-#   is_ipv6_enabled     = "true"
-#   comment             = "..."
-#   default_root_object = "index.html"
-#   price_class         = "PriceClass_All"
-#   depends_on          = ["aws_s3_bucket.origin"]
+resource "aws_cloudfront_distribution" "default" {
+  enabled             = "true"
+  is_ipv6_enabled     = "true"
+  comment             = "..."
+  default_root_object = "index.html"
+  price_class         = "PriceClass_All"
+  depends_on          = ["aws_s3_bucket.origin"]
 
-#   aliases = ["${var.domain_name}", "www.${var.domain_name}"]
+  aliases = ["${var.domain_name}", "www.${var.domain_name}"]
 
-#   origin {
-#     domain_name = "${aws_s3_bucket.origin.bucket_regional_domain_name}"
-#     origin_id   = "S3Origin"
+  origin {
+    domain_name = "${aws_s3_bucket.origin.bucket_regional_domain_name}"
+    origin_id   = "S3Origin"
 
-#     s3_origin_config {
-#       origin_access_identity = "${aws_cloudfront_origin_access_identity.default.cloudfront_access_identity_path}"
-#     }
-#   }
+    s3_origin_config {
+      origin_access_identity = "${aws_cloudfront_origin_access_identity.default.cloudfront_access_identity_path}"
+    }
+  }
 
-#   viewer_certificate {
-#     acm_certificate_arn = "${var.acm_certificate_arn}"
-#     ssl_support_method = "sni-only"
-#   }
+  viewer_certificate {
+    acm_certificate_arn = "${var.acm_certificate_arn}"
+    ssl_support_method = "sni-only"
+  }
 
-#   default_cache_behavior {
-#     allowed_methods  = ["GET", "HEAD"]
-#     cached_methods   = ["GET", "HEAD"]
-#     target_origin_id = "S3Origin"
-#     compress         = "true"
+  default_cache_behavior {
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "S3Origin"
+    compress         = "true"
 
-#     forwarded_values {
-#       query_string = "true"
+    forwarded_values {
+      query_string = "true"
 
-#       cookies {
-#         forward = "none"
-#       }
-#     }
+      cookies {
+        forward = "none"
+      }
+    }
 
-#     viewer_protocol_policy = "redirect-to-https"
-#     default_ttl            = "86400"
-#     min_ttl                = "0"
-#     max_ttl                = "31536000"
-#   }
+    viewer_protocol_policy = "redirect-to-https"
+    default_ttl            = "86400"
+    min_ttl                = "0"
+    max_ttl                = "31536000"
+  }
 
-#   restrictions {
-#     geo_restriction {
-#       restriction_type = "none"
-#       locations        = []
-#     }
-#   }
-# }
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+      locations        = []
+    }
+  }
+}
