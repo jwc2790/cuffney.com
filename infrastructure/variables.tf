@@ -13,3 +13,7 @@ variable "target_zone_id" {
 variable "acm_certificate_arn" {
   type    = "string"
 }
+
+variable "subdomain" {
+  type    = "string"
+}

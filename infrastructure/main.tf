@@ -41,13 +41,13 @@ resource "aws_cloudfront_origin_access_identity" "default" {
 
 resource "aws_route53_record" "a_record" {
   zone_id     = "${var.target_zone_id}"
-  name        = ""
+  name        = "${var.subdomain}"
   type        = "A"
   depends_on  = ["aws_cloudfront_distribution.default"]
 
   alias {
     name                   = "${aws_cloudfront_distribution.default.domain_name}"
-    evaluate_target_health = "true"
+    evaluate_target_health = "false"
     zone_id                = "${aws_cloudfront_distribution.default.hosted_zone_id }"
   }
 }
