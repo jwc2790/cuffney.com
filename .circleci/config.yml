@@ -83,7 +83,7 @@ jobs:
           name: validate terraform
           command: |
             terraform init -input=false infrastructure/ 
-            terraform validate infrastructure/
+            terraform validate -var-file=infrastructure/dev.tfvars infrastructure/
 
   deploy_infrastructure:
     <<: *defaults
