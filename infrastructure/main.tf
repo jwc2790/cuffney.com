@@ -5,12 +5,13 @@
 resource "aws_s3_bucket" "origin" {
   bucket = "${var.domain_name}"
   policy   = "${data.template_file.bucket_policy.rendered}"
+  force_destroy = true
 }
 
 resource "aws_s3_bucket" "www_redirect" {
-  # booleans are transformed to 1 and 0.
-  count = "${var.www_redirect}"
+  count = "${var.www_redirect}"         # booleans are transformed to 1 and 0.
   bucket = "www.${var.domain_name}"
+  force_destroy = true
 
   website {
     redirect_all_requests_to = "https://${var.domain_name}"
@@ -32,14 +33,12 @@ data "template_file" "bucket_policy" {
 
 resource "aws_cloudfront_origin_access_identity" "default" {
   comment = ""
-  # comment = "${module.distribution_label.id}"
 }
 
 ## ############################################################################
 ## DNS Records
 ## ############################################################################
 
-# TODO: create record pointing to CloudFront Distrobution
 resource "aws_route53_record" "a_record" {
   zone_id     = "${var.target_zone_id}"
   name        = ""
@@ -54,6 +53,8 @@ resource "aws_route53_record" "a_record" {
 }
 
 resource "aws_route53_record" "www_record" {
+  count = "${var.www_redirect}"         # booleans are transformed to 1 and 0.
+  
   zone_id     = "${var.target_zone_id}"
   name        = "www"
   type        = "A"

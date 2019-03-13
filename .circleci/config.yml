@@ -94,7 +94,8 @@ jobs:
           name: deploy infrastructure
           command: |
             terraform init -input=false infrastructure/
-            terraform apply -input=false -auto-approve infrastructure/ 
+            terraform apply -input=false -auto-approve \
+              -var-file=infrastructure/dev.tfvars infrastructure/
 
   deploy:
     <<: *defaults
