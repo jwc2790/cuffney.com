@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_PATH=src react-scripts start",
-    "build": "NODE_PATH=src react-scripts build",
+    "build": "PUBLIC_URL=http://localhost:8080 NODE_PATH=src react-scripts build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
     "lint": "NODE_PATH=src eslint src/**/*.js",
     "cover": "npm run test -- --coverage"
