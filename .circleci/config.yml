@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker: 
-    - image: circleci/node:11.0
+    - image: jcuffney/node-ci-image
   working_directory: ~/repo
 
 jobs:
@@ -57,17 +57,6 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
       - run: npm run test
 
-  # e2e_tests: 
-  #   docker: 
-  #     - image: circleci/node:11.0-browsers
-  #   working_directory: ~/repo
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         keys:
-  #           - v1-dependencies-{{ checksum "package.json" }}
-  #     - run: npm run lint
-
   coverage: 
     <<: *defaults
     environment:
@@ -83,26 +72,18 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
             ./cc-test-reporter before-build
-      - run: npm run cover 
+      - run: npm run cover
 
-  validate_cloudformation: 
+  validate_terraform: 
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
 
       - run:
-          name: Install awscli
-          command: sudo pip install awscli
-
-      - run:
-          name: validate cloudformation template
+          name: validate terraform
           command: |
-            aws cloudformation validate-template \
-              --template-body file://template.yml \
-              --region us-east-1
+            terraform init -input=false infrastructure/ 
+            terraform validate -var-file=infrastructure/dev.tfvars infrastructure/
 
   deploy_infrastructure:
     <<: *defaults
@@ -110,19 +91,11 @@ jobs:
       - checkout
 
       - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
-
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
-
-      - run:
           name: deploy infrastructure
           command: |
-            aws cloudformation update-stack \
-              --stack-name cuffney-com \
-              --template-body file://template.yml
+            terraform init -input=false infrastructure/
+            terraform apply -input=false -auto-approve \
+              -var-file=infrastructure/dev.tfvars infrastructure/
 
   deploy:
     <<: *defaults
@@ -132,14 +105,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-build-{{ checksum "package.json" }}
-
-      - run:
-          name: Install PIP
-          command: sudo apt-get install python-pip python-dev
-
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
 
       - deploy:
           name: sync build to s3
@@ -152,7 +117,6 @@ jobs:
             aws cloudfront create-invalidation \
               --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
               --paths "/*"
-
 
 workflows:
   version: 2
@@ -168,13 +132,10 @@ workflows:
       - tests:
           requires:
             - dependencies
-      # - e2e_tests:
-      #     requires:
-      #       - dependencies
       - coverage:
           requires:
             - dependencies
-      - validate_cloudformation
+      - validate_terraform
       - deploy_infrastructure:
           requires: 
             - dependencies
@@ -182,8 +143,6 @@ workflows:
             - lint
             - tests
             - coverage
-            - validate_cloudformation
-            # - e2e_tests
           filters:
             branches:
               only: master
@@ -193,4 +152,3 @@ workflows:
           filters:
             branches:
               only: master
-      
