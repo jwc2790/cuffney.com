@@ -3,7 +3,7 @@
         "Stack": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateUrl": "https://s3.amazonaws/cf-templates/static/template.json"
+                "TemplateURL": "https://s3.amazonaws/cf-templates/static/template.json"
             }
         }
     }
