@@ -83,6 +83,7 @@ jobs:
           name: validate terraform
           command: |
             aws cloudformation validate-template \
+              --template-body file://infra/template.json
 
 
   deploy_infra:

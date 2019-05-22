@@ -1,6 +1,6 @@
 // modules
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-snapshot';
 
 // Components
 import App from 'views/App';
@@ -11,8 +11,9 @@ import registerServiceWorker from './registerServiceWorker';
 // global styles
 import './index.css';
 
-ReactDOM.render((
-  <App />
-), document.getElementById('root'));
+render(
+  <App />,
+  document.getElementById('root')
+);
 
 registerServiceWorker();
