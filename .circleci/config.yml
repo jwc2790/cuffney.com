@@ -95,7 +95,7 @@ jobs:
           name: deploy infrastructure
           command: |
             aws cloudformation deploy \
-              --stack-name cuffney.com \
+              --stack-name cuffney-com \
               --template-file ./infra/template.json \
               --region us-east-1 \
               --capabilities CAPABILITY_IAM \
@@ -160,3 +160,4 @@ workflows:
           filters:
             branches:
               only: master
+
