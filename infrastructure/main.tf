@@ -79,7 +79,7 @@ resource "aws_cloudfront_distribution" "default" {
   price_class         = "PriceClass_All"
   depends_on          = ["aws_s3_bucket.origin"]
 
-  aliases = ["${var.domain_name}", "www.${var.domain_name}"]
+  aliases = ["${var.domain_name}"]
 
   origin {
     domain_name = "${aws_s3_bucket.origin.bucket_regional_domain_name}"
