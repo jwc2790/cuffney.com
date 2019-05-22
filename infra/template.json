@@ -3,7 +3,12 @@
         "Stack": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3.amazonaws/cf-templates/static/template.json"
+                "TemplateURL": "https://s3.amazonaws.com/com.cuffney.cf-templates/static-website/template.json",
+                "Parameters": {
+                    "DomainName": "cuffney.com",
+                    "HostedZoneId": "Z17UESAG3QE29Y",
+                    "AcmCertificateArn": "arn:aws:acm:us-east-1:255964265911:certificate/3a6c2c22-cb43-4c9b-9462-cf261b498eea"
+                }
             }
         }
     }
