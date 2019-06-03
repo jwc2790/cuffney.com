@@ -114,12 +114,12 @@ jobs:
           keys:
             - v1-build-{{ checksum "package.json" }}
 
-      - deploy:
+      - run:
           name: sync build to s3
           command: |
             aws s3 sync ./build s3://cuffney.com --delete
 
-      - deploy:
+      - run:
           name: Create CloudFront Invalidation
           command: |
             aws cloudfront create-invalidation \

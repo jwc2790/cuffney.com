@@ -26,7 +26,7 @@ const Home = (props) => {
             <a href="https://www.linkedin.com/in/cuffney/" { ...linkProps }>
               <FaLinkedin color="white" size="2em" />
             </a>
-            <a href="https://github.com/jwc2790" { ...linkProps }>
+            <a href="https://github.com/jcuffney" { ...linkProps }>
               <FaGithub color="white" size="2em" />
             </a>
           </p>

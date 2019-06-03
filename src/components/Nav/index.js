@@ -12,7 +12,7 @@ const Nav = (props) => {
       <p>
         { active !== '/' && <Link to="/">Home.</Link> }
         { active !== '/resume' && <Link to="/resume">Resume.</Link> }
-        { active !== '/work' && <Link to="/work">Work.</Link> }
+        { /* { active !== '/work' && <Link to="/work">Work.</Link> } */ }
       </p>
       <hr />
     </div>

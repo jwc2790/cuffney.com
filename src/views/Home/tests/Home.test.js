@@ -6,7 +6,7 @@ import Home from '..';
 describe('Home', () => {
 
   const LINKEDIN = 'https://www.linkedin.com/in/cuffney/';
-  const GITHUB = 'https://github.com/jwc2790';
+  const GITHUB = 'https://github.com/jcuffney';
 
   let props;
   beforeEach(() => {
