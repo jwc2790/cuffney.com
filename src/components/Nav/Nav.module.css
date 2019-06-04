@@ -1,5 +1,7 @@
 .nav {
   margin-bottom: 3rem;
+  width: 150px;
+  margin: auto;
 }
 
 .nav hr{
