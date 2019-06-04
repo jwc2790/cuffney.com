@@ -143,8 +143,10 @@ workflows:
       - coverage:
           requires:
             - dependencies
-      - validate_cloudformation
+      - validate_cloudformation:
+          context: AWS
       - deploy_infra:
+          context: AWS
           requires: 
             - dependencies
             - build
@@ -155,6 +157,7 @@ workflows:
             branches:
               only: master
       - deploy:
+          context: AWS
           requires:
             - deploy_infra
           filters:
