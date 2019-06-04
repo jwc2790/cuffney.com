@@ -46,11 +46,11 @@ npm start
 
 <!-- Markdown link & img dfn's -->
 [site-screenshot]: public/imgs/home-screenshot.png
-[circle-ci-badge]: https://circleci.com/gh/jwc2790/cuffney.com.svg?style=svg
-[circle-ci-url]: https://circleci.com/gh/jwc2790/cuffney.com
+[circle-ci-badge]: https://circleci.com/gh/jcuffney/cuffney.com.svg?style=svg
+[circle-ci-url]: https://circleci.com/gh/jcuffney/cuffney.com
 [code-climate-maintainability-badge]: https://api.codeclimate.com/v1/badges/38e97723b5dda025cc10/maintainability
-[code-climate-maintainability-url]: https://codeclimate.com/github/jwc2790/cuffney.com/maintainability
+[code-climate-maintainability-url]: https://codeclimate.com/github/jcuffney/cuffney.com/maintainability
 [code-climate-test-coverage-badge]: https://api.codeclimate.com/v1/badges/38e97723b5dda025cc10/test_coverage
-[code-climate-test-coverage-url]: https://codeclimate.com/github/jwc2790/cuffney.com/test_coverage
-[greenkeeper-badge]: https://badges.greenkeeper.io/jwc2790/cuffney.com.svg
+[code-climate-test-coverage-url]: https://codeclimate.com/github/jcuffney/cuffney.com/test_coverage
+[greenkeeper-badge]: https://badges.greenkeeper.io/jcuffney/cuffney.com.svg
 [greenkeeper-url]: https://greenkeeper.io/
