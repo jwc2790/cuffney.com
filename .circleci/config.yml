@@ -162,7 +162,7 @@ jobs:
     steps:
       - checkout
       - deploy:
-          stack_name: dev-cuffney-com
+          domain_name: dev.cuffney.com
           cloudfront_distribution_id:  E1CN846N9AT9KM
 
 
@@ -179,7 +179,7 @@ jobs:
     steps:
       - checkout
       - deploy:
-          stack_name: cuffney-com
+          domain_name: cuffney.com
           cloudfront_distribution_id:  E14QAQ1VLZGJSD
 
 workflows:
