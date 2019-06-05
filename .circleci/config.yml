@@ -62,6 +62,11 @@ commands:
 
     steps:
       - checkout
+      
+      - restore_cache:
+          keys:
+            - v1-build-{{ checksum "package.json" }}
+
       - run:
           name: sync build to s3
           command: |
