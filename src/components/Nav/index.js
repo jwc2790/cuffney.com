@@ -11,7 +11,7 @@ const Nav = (props) => {
       <hr />
       <p>
         { active !== '/' && <Link to="/">Home.</Link> }
-        { active !== '/resume' && <Link to="/resume">Resume.</Link> }
+        { active !== '/resume' && <a href="https://resume.cuffney.com" target='_blank' rel="noopener noreferrer">Resume.</a> }
         { /* { active !== '/work' && <Link to="/work">Work.</Link> } */ }
       </p>
       <hr />
