@@ -43,7 +43,6 @@ commands:
       template_body_path:
         type: string
         default: ./infra/template.json
-
     steps:
       - checkout
       - run:
