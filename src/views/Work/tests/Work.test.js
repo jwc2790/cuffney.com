@@ -10,7 +10,7 @@ jest.mock('projects', () => ({
       title: 'Title',
       to: 'https://google.com',
     },
-  ]
+  ],
 }));
 
 import Work from '..';
@@ -22,33 +22,35 @@ describe('Work', () => {
     props = {
       location: {
         pathname: '/work',
-      }
-    }
-  })
+      },
+    };
+  });
 
   let component;
   beforeEach(() => {
     component = shallow(
       <Work { ...props } />
     );
-  })
+  });
 
   it('should render my name and title', () => {
-    expect(component.find('h1').first().text()).toEqual('Work.')
-  })
+    expect(component.find('h1').first()
+      .text()).toEqual('Work.');
+  });
 
   it('should contain Nav', () => {
     expect(component.find('Nav').length).toEqual(1);
-  })
+  });
 
   it('should contain 1 Card with correct props', () => {
     expect(component.find('Card').length).toEqual(1);
-    expect(component.find('Card').first().props()).toEqual({
+    expect(component.find('Card').first()
+      .props()).toEqual({
       slug: 'slug',
       src: '/imgs/work/test.jpg',
       title: 'Title',
       to: 'https://google.com',
     });
-  })
+  });
 
 });

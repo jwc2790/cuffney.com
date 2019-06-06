@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import withTracker from 'components/WithTracker'
+import withTracker from 'components/WithTracker';
 
 import Home from 'views/Home';
 import Work from 'views/Work';

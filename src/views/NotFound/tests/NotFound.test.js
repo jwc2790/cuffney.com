@@ -10,24 +10,25 @@ describe('NotFound', () => {
     props = {
       location: {
         pathname: '/literally-anything-that-isnt-valid',
-      }
-    }
-  })
+      },
+    };
+  });
 
   let component;
   beforeEach(() => {
     component = shallow(
       <NotFound { ...props } />
     );
-  })
+  });
 
   it('should render my name and title', () => {
-    expect(component.find('h1').first().text()).toEqual('404. Not Found.')
-  })
+    expect(component.find('h1').first()
+      .text()).toEqual('404. Not Found.');
+  });
 
 
   it('should contain Nav', () => {
     expect(component.find('Nav').length).toEqual(1);
-  })
+  });
 
 });

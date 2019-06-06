@@ -6,7 +6,7 @@
     "start": "NODE_PATH=src react-scripts start",
     "build": "NODE_PATH=src react-scripts build && react-snapshot",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
-    "lint": "NODE_PATH=src eslint src/**/*.js",
+    "lint": "NODE_PATH=src eslint --fix src/**/*.js",
     "cover": "npm run test -- --coverage"
   },
   "dependencies": {
@@ -16,13 +16,13 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-ga": "^2.5.7",
-    "react-icons": "^3.4.0",
+    "react-icons": "^3.7.0",
     "react-redux": "^7.0.3",
-    "react-router-dom": "^5.0.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1"
   },
   "devDependencies": {
-    "@cuffney/eslint-config": "^1.0.0",
+    "@cuffney/eslint-config": "^1.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "chai": "^4.2.0",
     "eslint-config-airbnb": "^17.1.0",
