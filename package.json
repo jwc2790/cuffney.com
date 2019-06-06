@@ -22,7 +22,7 @@
     "react-scripts": "^3.0.1"
   },
   "devDependencies": {
-    "@cuffney/eslint-config": "^1.0.1",
+    "@cuffney/eslint-config": "^1.0.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "chai": "^4.2.0",
     "eslint-config-airbnb": "^17.1.0",
