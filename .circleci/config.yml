@@ -47,7 +47,7 @@ jobs:
       # get .env from secrets job.
       - attach_workspace:
           at: /home/circleci/project
-      - run: . ./.env && npm run build
+      - run: npm run build
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
@@ -86,17 +86,17 @@ workflows:
       - lint:
           requires:
             - install
-      - test:
-          context: cuffney
-          requires:
-            - install
+      # - test:
+      #     context: cuffney
+      #     requires:
+      #       - install
       - build:
           requires:
             - install
       - infra:
           context: cuffney
           requires:
-            - test
+            # - test
             - lint
             - build
           filters:
