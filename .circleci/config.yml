@@ -87,7 +87,7 @@ workflows:
           requires:
             - install
       - test:
-          context: onset
+          context: cuffney
           requires:
             - install
       - build:
