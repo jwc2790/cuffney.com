@@ -1,41 +1,40 @@
-import React from 'react';
-import propTypes from 'prop-types';
-import Nav from 'components/Nav';
+import React from 'react'
+import propTypes from 'prop-types'
+import Nav from 'components/Nav'
 
-import styles from './Resume.module.css';
+import styles from './Resume.module.css'
 
 const Resume = (props) => {
-  const { location: { pathname } } = props;
+  const { location: { pathname } } = props
   return (
-    <div className={ styles.wrapper }>
+    <div className={styles.wrapper}>
       <h1>Resume.</h1>
-      <Nav active={ pathname } />
+      <Nav active={pathname} />
       <a
-        className={ styles.download }
-        href="https://resume.cuffney.com/resume.pdf"
-        download={ true }
-        target="_blank"
-        rel="noopener noreferrer"
+        className={styles.download}
+        href='https://resume.cuffney.com/resume.pdf'
+        download
+        target='_blank'
+        rel='noopener noreferrer'
       >
         Download PDF
       </a>
-      <div className={ styles.content }>
+      <div className={styles.content}>
         <iframe
-          className={ styles.iframe }
-          src="https://resume.cuffney.com"
-          title="resume"
-          frameBorder="0"
+          className={styles.iframe}
+          src='https://resume.cuffney.com'
+          title='resume'
+          frameBorder='0'
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 Resume.propTypes = {
   location: propTypes.shape({
-    pathname: propTypes.string.isRequired,
-  }).isRequired,
-};
+    pathname: propTypes.string.isRequired
+  }).isRequired
+}
 
-
-export default Resume;
+export default Resume

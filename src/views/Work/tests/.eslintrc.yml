@@ -1,1 +1,1 @@
-extends: './../../../../eslint/react.test.js'
+extends: "@cuffney/eslint-config/react-test"

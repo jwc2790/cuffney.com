@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="8" failures="0" errors="0" time="4.699">
+  <testsuite name="lib/env" errors="0" failures="0" skipped="0" timestamp="2021-01-19T20:14:15" time="1.418" tests="6">
+    <testcase classname="lib/env isTest should return true for NODE_ENV=test" name="lib/env isTest should return true for NODE_ENV=test" time="0.001">
+    </testcase>
+    <testcase classname="lib/env isTest should return false for NODE_ENV=dev" name="lib/env isTest should return false for NODE_ENV=dev" time="0">
+    </testcase>
+    <testcase classname="lib/env isTest should return false for NODE_ENV=prod" name="lib/env isTest should return false for NODE_ENV=prod" time="0">
+    </testcase>
+    <testcase classname="lib/env getAnalyticsId should return ANALYTICS_DEV for NODE_ENV=test" name="lib/env getAnalyticsId should return ANALYTICS_DEV for NODE_ENV=test" time="0.001">
+    </testcase>
+    <testcase classname="lib/env getAnalyticsId should return ANALYTICS_DEV for NODE_ENV=dev" name="lib/env getAnalyticsId should return ANALYTICS_DEV for NODE_ENV=dev" time="0">
+    </testcase>
+    <testcase classname="lib/env getAnalyticsId should return ANALYTICS_DEV for undefined NODE_ENV" name="lib/env getAnalyticsId should return ANALYTICS_DEV for undefined NODE_ENV" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Nav" errors="0" failures="0" skipped="0" timestamp="2021-01-19T20:14:17" time="0.244" tests="1">
+    <testcase classname="Nav renders as expected" name="Nav renders as expected" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Card" errors="0" failures="0" skipped="0" timestamp="2021-01-19T20:14:17" time="0.189" tests="1">
+    <testcase classname="Card renders as expected" name="Card renders as expected" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

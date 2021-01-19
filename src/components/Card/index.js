@@ -1,33 +1,32 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React from 'react'
+import propTypes from 'prop-types'
 
 const Card = (props) => {
   const {
     title,
     src,
-    slug,
-  } = props;
+    slug
+  } = props
   return (
-    <div className="card">
-      <img src={ src } alt={ slug } />
+    <div className='card'>
+      <img src={src} alt={slug} />
       <div>
         <h3>{ title }</h3>
       </div>
     </div>
-  );
-};
+  )
+}
 
 Card.propTypes = {
   slug: propTypes.string,
   src: propTypes.string,
-  title: propTypes.string,
-};
+  title: propTypes.string
+}
 
 Card.defaultProps = {
   slug: '',
   src: '',
-  title: '',
-};
+  title: ''
+}
 
-
-export default Card;
+export default Card
